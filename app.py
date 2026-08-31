@@ -1,14 +1,14 @@
 import os
 
-# Use writable directory on Render
+# Make Ultralytics use a writable directory on Render
 os.environ["YOLO_CONFIG_DIR"] = "/tmp/Ultralytics"
 
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify
 from ultralytics import YOLO
 from PIL import Image
-import io
 import numpy as np
 import cv2
+import base64
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ print("Loading YOLO object detection model...")
 
 model = YOLO("yolo11n.pt")
 
-print("YOLO model loaded successfully!")
+print("YOLO11n model loaded successfully!")
 
 
 @app.route("/")
@@ -46,32 +46,33 @@ def detect():
 
         file = request.files["file"]
 
-        if not file:
+        if file.filename == "":
             return jsonify({
                 "success": False,
-                "error": "Invalid image."
+                "error": "No image selected."
             }), 400
 
-        # Read image
+        # Open image
         image = Image.open(file.stream).convert("RGB")
 
-        # Keep image small to reduce RAM usage
-        image.thumbnail((800, 800))
+        # Reduce image size to save RAM
+        image.thumbnail((640, 640))
 
         frame = np.array(image)
 
+        # RGB -> BGR
         frame = cv2.cvtColor(
             frame,
             cv2.COLOR_RGB2BGR
         )
 
-        print("Running YOLO...")
+        print("Running YOLO detection...")
 
-        # Lightweight CPU prediction
+        # Lightweight CPU detection
         results = model.predict(
             source=frame,
-            imgsz=416,
-            conf=0.35,
+            imgsz=320,
+            conf=0.25,
             device="cpu",
             verbose=False
         )
@@ -97,16 +98,10 @@ def detect():
                     )
                 })
 
-        print(
-            "Detection completed:",
-            len(detections),
-            "objects"
-        )
-
-        # Create annotated image
+        # Draw bounding boxes
         annotated = result.plot()
 
-        # Compress output image
+        # Compress image
         success, buffer = cv2.imencode(
             ".jpg",
             annotated,
@@ -121,13 +116,23 @@ def detect():
                 "Could not create result image."
             )
 
-        # Return image directly as a small binary response
-        return send_file(
-            io.BytesIO(buffer.tobytes()),
-            mimetype="image/jpeg",
-            as_attachment=False,
-            download_name="result.jpg"
+        # Convert image to Base64
+        encoded_image = base64.b64encode(
+            buffer.tobytes()
+        ).decode("utf-8")
+
+        print(
+            "Detection completed:",
+            len(detections),
+            "objects"
         )
+
+        return jsonify({
+            "success": True,
+            "detections": detections,
+            "count": len(detections),
+            "image": "data:image/jpeg;base64," + encoded_image
+        })
 
     except Exception as e:
 
@@ -147,7 +152,7 @@ if __name__ == "__main__":
     port = int(
         os.environ.get(
             "PORT",
-            10000
+            "10000"
         )
     )
 
