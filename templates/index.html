@@ -1,102 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Real-Time Object Detection</title>
-<link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-Time Object Detection</title>
+
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
 
 <header>
     <h1>Real-Time Object Detection</h1>
-    <p>Camera / Upload → AI → Object Detection</p>
+    <p>Camera → Capture → AI → Object Detection</p>
 </header>
 
 <main>
 
-<section class="card">
+    <!-- =========================
+         CAMERA SECTION
+    ========================== -->
 
-    <div class="camera">
-        <video id="camera" autoplay playsinline muted></video>
-        <span id="msg">Camera is off</span>
-    </div>
+    <section class="card">
 
-    <!-- Hidden canvas used to capture camera photo -->
-    <canvas id="canvas" style="display:none;"></canvas>
+        <h2>📷 Camera Detection</h2>
 
-    <div class="buttons">
+        <div class="camera">
 
-        <button id="start">
-            📷 Start Camera
-        </button>
+            <video
+                id="camera"
+                autoplay
+                playsinline
+                muted>
+            </video>
 
-        <button id="capture" disabled>
-            📸 Capture Photo
-        </button>
+            <span id="msg">
+                Camera is off
+            </span>
 
-        <button id="stop" disabled>
-            ⏹ Stop Camera
-        </button>
+        </div>
 
-        <label>
-            📁 Upload Image
-            <input
-                id="upload"
-                type="file"
-                accept="image/*"
-            >
-        </label>
+        <div class="buttons">
 
-    </div>
+            <button id="start">
+                📷 Start Camera
+            </button>
 
-    <p id="status">
-        Press Start Camera to begin.
-    </p>
+            <button id="capture" disabled>
+                📸 Capture Photo
+            </button>
 
-</section>
+            <button id="stop" disabled>
+                ⏹ Stop Camera
+            </button>
 
+        </div>
 
-<section class="card">
+        <canvas id="canvas"></canvas>
 
-    <h2>Detection Result</h2>
+        <p id="status">
+            Press Start Camera to begin.
+        </p>
 
-    <img
-        id="result"
-        alt="Detection result"
-    >
-
-    <p id="count">
-        No detections yet.
-    </p>
-
-    <div id="items"></div>
-
-</section>
+    </section>
 
 
-<section class="card">
+    <!-- =========================
+         UPLOAD SECTION
+    ========================== -->
 
-    <h2>How it works</h2>
+    <section class="card">
 
-    <ol>
-        <li>Press Start Camera.</li>
-        <li>Allow camera permission.</li>
-        <li>Point the camera at an object.</li>
-        <li>Press Capture Photo.</li>
-        <li>The captured image is sent to the AI model.</li>
-        <li>YOLO detects objects and draws bounding boxes.</li>
-        <li>Object names and confidence are displayed.</li>
-    </ol>
+        <h2>🖼️ Upload Image</h2>
 
-    <p>
-        <b>Model:</b> YOLO11n ONNX
-    </p>
+        <div class="buttons">
 
-</section>
+            <label>
+                📁 Choose Image
+
+                <input
+                    id="upload"
+                    type="file"
+                    accept="image/*">
+            </label>
+
+        </div>
+
+        <p>
+            You can upload an image instead of using the camera.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         DETECTION RESULT
+    ========================== -->
+
+    <section class="card">
+
+        <h2>🔍 Detection Result</h2>
+
+        <img
+            id="result"
+            alt="Detection result">
+
+        <p id="count">
+            No detections yet.
+        </p>
+
+        <div id="items"></div>
+
+    </section>
+
+
+    <!-- =========================
+         OBJECT DASHBOARD
+    ========================== -->
+
+    <section class="card">
+
+        <h2>📊 Object Dashboard</h2>
+
+        <p>
+            Supported objects in the custom detection model:
+        </p>
+
+        <div id="objectDashboard">
+
+            <div class="item">
+                <b>1.</b> Male Person
+            </div>
+
+            <div class="item">
+                <b>2.</b> Female Person
+            </div>
+
+            <div class="item">
+                <b>3.</b> Pen
+            </div>
+
+            <div class="item">
+                <b>4.</b> Pencil
+            </div>
+
+            <div class="item">
+                <b>5.</b> Water Bottle
+            </div>
+
+            <div class="item">
+                <b>6.</b> Animal
+            </div>
+
+            <div class="item">
+                <b>7.</b> Bird
+            </div>
+
+            <div class="item">
+                <b>8.</b> Laptop
+            </div>
+
+            <div class="item">
+                <b>9.</b> Mobile Phone
+            </div>
+
+            <div class="item">
+                <b>10.</b> Computer
+            </div>
+
+            <div class="item">
+                <b>11.</b> Book
+            </div>
+
+            <div class="item">
+                <b>12.</b> Eraser
+            </div>
+
+            <div class="item">
+                <b>13.</b> Earphones
+            </div>
+
+            <div class="item">
+                <b>14.</b> Charger
+            </div>
+
+            <div class="item">
+                <b>15.</b> Watch
+            </div>
+
+            <div class="item">
+                <b>16.</b> Keys
+            </div>
+
+            <div class="item">
+                <b>17.</b> Calculator
+            </div>
+
+            <div class="item">
+                <b>18.</b> Bench
+            </div>
+
+            <div class="item">
+                <b>19.</b> College Bag
+            </div>
+
+            <div class="item">
+                <b>20.</b> Mouse
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section class="card">
+
+        <h2>⚙️ How It Works</h2>
+
+        <ol>
+
+            <li>Allow camera permission.</li>
+
+            <li>Start the camera.</li>
+
+            <li>Point the camera at an object.</li>
+
+            <li>Click <b>Capture Photo</b>.</li>
+
+            <li>The captured image is sent to the AI.</li>
+
+            <li>YOLO detects the object.</li>
+
+            <li>Bounding boxes are displayed.</li>
+
+            <li>Object name and confidence are displayed.</li>
+
+            <li>Voice announces the detected object.</li>
+
+        </ol>
+
+        <p>
+            <b>Model:</b>
+            YOLO custom-trained object detection model
+        </p>
+
+    </section>
 
 </main>
+
 
 <script src="/static/app.js"></script>
 
