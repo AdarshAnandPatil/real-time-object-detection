@@ -121,7 +121,7 @@ label input {
 #status {
     text-align: center;
     font-weight: bold;
-    margin-top: 16px;
+    margin-top: 15px;
 }
 
 
@@ -141,10 +141,9 @@ label input {
 #result {
     display: none;
     width: 100%;
-    max-width: 800px;
+    max-width: 850px;
     margin: 15px auto;
     border-radius: 12px;
-    border: 1px solid #d0d5dd;
 }
 
 
@@ -156,7 +155,6 @@ label input {
     display: grid;
     grid-template-columns:
         repeat(auto-fit, minmax(180px, 1fr));
-
     gap: 10px;
 }
 
@@ -164,33 +162,39 @@ label input {
     background: #eef5fb;
     border-radius: 10px;
     padding: 12px;
-    border: 1px solid #d9e8f5;
+    font-size: 15px;
 }
 
 
 /* =========================
-   OBJECT DASHBOARD
+   DASHBOARD
 ========================= */
 
 #objectDashboard {
     display: grid;
-
     grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
-
+        repeat(auto-fit, minmax(210px, 1fr));
     gap: 10px;
 }
 
 #objectDashboard .item {
     background: #eef5fb;
     border-radius: 10px;
-    padding: 12px;
-    border: 1px solid #d9e8f5;
-    font-size: 15px;
+    padding: 14px;
+    border-left: 4px solid #2878b5;
 }
 
-#objectDashboard .item b {
-    margin-right: 5px;
+#objectDashboard .item strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+#objectDashboard .item span {
+    display: block;
+    margin-top: 6px;
+    color: #667085;
+    font-size: 13px;
 }
 
 
@@ -201,11 +205,12 @@ label input {
 @media (max-width: 600px) {
 
     main {
-        margin-top: 15px;
+        margin: 15px auto;
+        padding: 0 10px;
     }
 
     .card {
-        padding: 15px;
+        padding: 16px;
     }
 
     header h1 {
@@ -215,11 +220,13 @@ label input {
     button,
     label {
         width: 100%;
-        text-align: center;
     }
 
     .camera {
         min-height: 240px;
     }
 
+    #objectDashboard {
+        grid-template-columns: 1fr;
+    }
 }
