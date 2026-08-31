@@ -1,14 +1,14 @@
 import os
 
-# Use a writable directory on Render before importing Ultralytics
+# Use writable directory on Render
 os.environ["YOLO_CONFIG_DIR"] = "/tmp/Ultralytics"
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 from ultralytics import YOLO
 from PIL import Image
+import io
 import numpy as np
 import cv2
-import base64
 
 app = Flask(__name__)
 
@@ -36,31 +36,27 @@ def health():
 def detect():
 
     try:
-
-        print("Received detection request")
+        print("Detection request received")
 
         if "file" not in request.files:
-
             return jsonify({
                 "success": False,
-                "error": "No image file received."
+                "error": "No image received."
             }), 400
 
         file = request.files["file"]
 
-        if file.filename == "":
-
+        if not file:
             return jsonify({
                 "success": False,
-                "error": "No image selected."
+                "error": "Invalid image."
             }), 400
 
-        print("Reading image...")
-
+        # Read image
         image = Image.open(file.stream).convert("RGB")
 
-        # Resize large images to reduce processing time
-        image.thumbnail((1280, 1280))
+        # Keep image small to reduce RAM usage
+        image.thumbnail((800, 800))
 
         frame = np.array(image)
 
@@ -69,87 +65,80 @@ def detect():
             cv2.COLOR_RGB2BGR
         )
 
-        print("Running YOLO detection...")
+        print("Running YOLO...")
 
+        # Lightweight CPU prediction
         results = model.predict(
             source=frame,
-            conf=0.30,
-            imgsz=640,
+            imgsz=416,
+            conf=0.35,
             device="cpu",
             verbose=False
         )
 
         result = results[0]
 
-        print("YOLO detection completed")
-
-        annotated = result.plot()
-
         detections = []
 
         if result.boxes is not None:
 
-            for box, confidence, cls in zip(
-                result.boxes.xyxy.cpu().numpy(),
+            for confidence, cls in zip(
                 result.boxes.conf.cpu().numpy(),
                 result.boxes.cls.cpu().numpy()
             ):
 
                 class_id = int(cls)
 
-                object_name = result.names[class_id]
-
-                confidence_value = round(
-                    float(confidence) * 100,
-                    2
-                )
-
                 detections.append({
-                    "name": object_name,
-                    "confidence": confidence_value
+                    "name": result.names[class_id],
+                    "confidence": round(
+                        float(confidence) * 100,
+                        2
+                    )
                 })
 
         print(
-            "Objects detected:",
-            len(detections)
+            "Detection completed:",
+            len(detections),
+            "objects"
         )
 
+        # Create annotated image
+        annotated = result.plot()
+
+        # Compress output image
         success, buffer = cv2.imencode(
             ".jpg",
             annotated,
             [
                 int(cv2.IMWRITE_JPEG_QUALITY),
-                70
+                60
             ]
         )
 
         if not success:
-
             raise RuntimeError(
                 "Could not create result image."
             )
 
-        encoded_image = base64.b64encode(
-            buffer
-        ).decode("utf-8")
+        # Return image directly as a small binary response
+        return send_file(
+            io.BytesIO(buffer.tobytes()),
+            mimetype="image/jpeg",
+            as_attachment=False,
+            download_name="result.jpg"
+        )
 
-        return jsonify({
-            "success": True,
-            "image": "data:image/jpeg;base64," + encoded_image,
-            "detections": detections,
-            "count": len(detections)
-        })
-
-    except Exception as error:
+    except Exception as e:
 
         print(
             "DETECTION ERROR:",
-            repr(error)
+            repr(e)
         )
 
         return jsonify({
             "success": False,
-            "error": str(error)
+            "error": str(e)
         }), 500
 
 
