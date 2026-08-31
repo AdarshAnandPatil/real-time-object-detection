@@ -1,60 +1,168 @@
+import os
+
+# Use a writable directory on Render before importing Ultralytics
+os.environ["YOLO_CONFIG_DIR"] = "/tmp/Ultralytics"
+
 from flask import Flask, render_template, request, jsonify
 from ultralytics import YOLO
 from PIL import Image
 import numpy as np
 import cv2
 import base64
-import os
 
 app = Flask(__name__)
 
 print("Loading YOLO object detection model...")
+
 model = YOLO("yolo11n.pt")
+
 print("YOLO model loaded successfully!")
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-@app.route("/detect", methods=["POST"])
-def detect():
-    try:
-        if "file" not in request.files:
-            return jsonify(success=False, error="No image received."), 400
-        file = request.files["file"]
-        image = Image.open(file.stream).convert("RGB")
-        frame = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-
-        result = model.predict(source=frame, conf=0.35, verbose=False)[0]
-        annotated = result.plot()
-
-        detections = []
-        if result.boxes is not None:
-            for box, conf, cls in zip(result.boxes.xyxy.cpu().numpy(),
-                                      result.boxes.conf.cpu().numpy(),
-                                      result.boxes.cls.cpu().numpy()):
-                cid = int(cls)
-                detections.append({
-                    "name": result.names[cid],
-                    "confidence": round(float(conf) * 100, 2)
-                })
-
-        ok, buf = cv2.imencode(".jpg", annotated, [int(cv2.IMWRITE_JPEG_QUALITY), 82])
-        if not ok:
-            raise RuntimeError("Could not encode result image.")
-
-        encoded = base64.b64encode(buf).decode("utf-8")
-        return jsonify(success=True,
-                       image="data:image/jpeg;base64," + encoded,
-                       detections=detections,
-                       count=len(detections))
-    except Exception as e:
-        print("Detection error:", repr(e))
-        return jsonify(success=False, error=str(e)), 500
 
 @app.route("/health")
 def health():
-    return jsonify(status="ok", model="YOLO11n")
+    return jsonify({
+        "status": "ok",
+        "model": "YOLO11n"
+    })
+
+
+@app.route("/detect", methods=["POST"])
+def detect():
+
+    try:
+
+        print("Received detection request")
+
+        if "file" not in request.files:
+
+            return jsonify({
+                "success": False,
+                "error": "No image file received."
+            }), 400
+
+        file = request.files["file"]
+
+        if file.filename == "":
+
+            return jsonify({
+                "success": False,
+                "error": "No image selected."
+            }), 400
+
+        print("Reading image...")
+
+        image = Image.open(file.stream).convert("RGB")
+
+        # Resize large images to reduce processing time
+        image.thumbnail((1280, 1280))
+
+        frame = np.array(image)
+
+        frame = cv2.cvtColor(
+            frame,
+            cv2.COLOR_RGB2BGR
+        )
+
+        print("Running YOLO detection...")
+
+        results = model.predict(
+            source=frame,
+            conf=0.30,
+            imgsz=640,
+            device="cpu",
+            verbose=False
+        )
+
+        result = results[0]
+
+        print("YOLO detection completed")
+
+        annotated = result.plot()
+
+        detections = []
+
+        if result.boxes is not None:
+
+            for box, confidence, cls in zip(
+                result.boxes.xyxy.cpu().numpy(),
+                result.boxes.conf.cpu().numpy(),
+                result.boxes.cls.cpu().numpy()
+            ):
+
+                class_id = int(cls)
+
+                object_name = result.names[class_id]
+
+                confidence_value = round(
+                    float(confidence) * 100,
+                    2
+                )
+
+                detections.append({
+                    "name": object_name,
+                    "confidence": confidence_value
+                })
+
+        print(
+            "Objects detected:",
+            len(detections)
+        )
+
+        success, buffer = cv2.imencode(
+            ".jpg",
+            annotated,
+            [
+                int(cv2.IMWRITE_JPEG_QUALITY),
+                70
+            ]
+        )
+
+        if not success:
+
+            raise RuntimeError(
+                "Could not create result image."
+            )
+
+        encoded_image = base64.b64encode(
+            buffer
+        ).decode("utf-8")
+
+        return jsonify({
+            "success": True,
+            "image": "data:image/jpeg;base64," + encoded_image,
+            "detections": detections,
+            "count": len(detections)
+        })
+
+    except Exception as error:
+
+        print(
+            "DETECTION ERROR:",
+            repr(error)
+        )
+
+        return jsonify({
+            "success": False,
+            "error": str(error)
+        }), 500
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
+    port = int(
+        os.environ.get(
+            "PORT",
+            10000
+        )
+    )
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )
