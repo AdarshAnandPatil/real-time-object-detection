@@ -6,32 +6,99 @@
 <title>Real-Time Object Detection</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-<header><h1>Real-Time Object Detection</h1><p>Camera → AI → Object Detection</p></header>
+
+<header>
+    <h1>Real-Time Object Detection</h1>
+    <p>Camera / Upload → AI → Object Detection</p>
+</header>
+
 <main>
+
 <section class="card">
-<div class="camera"><video id="camera" autoplay playsinline muted></video><span id="msg">Camera is off</span></div>
-<div class="buttons">
-<button id="start">📷 Start Camera</button>
-<button id="stop" disabled>⏹ Stop Camera</button>
-<label>📁 Upload Image<input id="upload" type="file" accept="image/*"></label>
-</div>
-<p id="status">Press Start Camera to begin.</p>
+
+    <div class="camera">
+        <video id="camera" autoplay playsinline muted></video>
+        <span id="msg">Camera is off</span>
+    </div>
+
+    <!-- Hidden canvas used to capture camera photo -->
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <div class="buttons">
+
+        <button id="start">
+            📷 Start Camera
+        </button>
+
+        <button id="capture" disabled>
+            📸 Capture Photo
+        </button>
+
+        <button id="stop" disabled>
+            ⏹ Stop Camera
+        </button>
+
+        <label>
+            📁 Upload Image
+            <input
+                id="upload"
+                type="file"
+                accept="image/*"
+            >
+        </label>
+
+    </div>
+
+    <p id="status">
+        Press Start Camera to begin.
+    </p>
+
 </section>
+
+
 <section class="card">
-<h2>Detection Result</h2>
-<img id="result" alt="Detection result">
-<p id="count">No detections yet.</p>
-<div id="items"></div>
+
+    <h2>Detection Result</h2>
+
+    <img
+        id="result"
+        alt="Detection result"
+    >
+
+    <p id="count">
+        No detections yet.
+    </p>
+
+    <div id="items"></div>
+
 </section>
+
+
 <section class="card">
-<h2>How it works</h2>
-<ol><li>Allow camera permission.</li><li>Point the camera at objects.</li>
-<li>Frames are sent to the AI model.</li><li>YOLO draws bounding boxes.</li>
-<li>Names and confidence are shown automatically.</li></ol>
-<p><b>Model:</b> YOLO11n (COCO)</p>
+
+    <h2>How it works</h2>
+
+    <ol>
+        <li>Press Start Camera.</li>
+        <li>Allow camera permission.</li>
+        <li>Point the camera at an object.</li>
+        <li>Press Capture Photo.</li>
+        <li>The captured image is sent to the AI model.</li>
+        <li>YOLO detects objects and draws bounding boxes.</li>
+        <li>Object names and confidence are displayed.</li>
+    </ol>
+
+    <p>
+        <b>Model:</b> YOLO11n ONNX
+    </p>
+
 </section>
+
 </main>
+
 <script src="/static/app.js"></script>
+
 </body>
 </html>
