@@ -7,13 +7,13 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# ==============================
-# YOLO ONNX MODEL
-# ==============================
+# =========================================================
+# MODEL
+# =========================================================
 
 MODEL_PATH = "yolo11n.onnx"
 
-print("Loading YOLO ONNX model...")
+print("Loading YOLO11n ONNX model...")
 
 session = ort.InferenceSession(
     MODEL_PATH,
@@ -22,13 +22,13 @@ session = ort.InferenceSession(
 
 input_name = session.get_inputs()[0].name
 
-print("YOLO ONNX model loaded successfully!")
-print("Input name:", input_name)
+print("YOLO11n ONNX model loaded successfully!")
+print("Input:", input_name)
 
 
-# ==============================
+# =========================================================
 # COCO CLASS NAMES
-# ==============================
+# =========================================================
 
 CLASS_NAMES = [
     "person", "bicycle", "car", "motorcycle", "airplane",
@@ -51,18 +51,18 @@ CLASS_NAMES = [
 ]
 
 
-# ==============================
+# =========================================================
 # HOME
-# ==============================
+# =========================================================
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# ==============================
-# HEALTH CHECK
-# ==============================
+# =========================================================
+# HEALTH
+# =========================================================
 
 @app.route("/health")
 def health():
@@ -72,16 +72,19 @@ def health():
     })
 
 
-# ==============================
-# OBJECT DETECTION
-# ==============================
+# =========================================================
+# DETECTION
+# =========================================================
 
 @app.route("/detect", methods=["POST"])
 def detect():
 
     try:
-
         print("Detection request received")
+
+        # -------------------------------------------------
+        # Check file
+        # -------------------------------------------------
 
         if "file" not in request.files:
             return jsonify({
@@ -97,7 +100,10 @@ def detect():
                 "error": "No image selected"
             }), 400
 
-        # Read uploaded image
+        # -------------------------------------------------
+        # Read image
+        # -------------------------------------------------
+
         data = np.frombuffer(
             file.read(),
             np.uint8
@@ -114,76 +120,119 @@ def detect():
                 "error": "Invalid image"
             }), 400
 
-        # ==============================
-        # Resize image
-        # ==============================
-
         original = image.copy()
 
-        height, width = image.shape[:2]
+        original_height, original_width = image.shape[:2]
 
-        img = cv2.resize(
+        # -------------------------------------------------
+        # YOLO input size
+        # -------------------------------------------------
+
+        INPUT_SIZE = 320
+
+        resized = cv2.resize(
             image,
-            (320, 320)
+            (INPUT_SIZE, INPUT_SIZE)
         )
 
         # BGR -> RGB
-        img = cv2.cvtColor(
-            img,
+        resized = cv2.cvtColor(
+            resized,
             cv2.COLOR_BGR2RGB
         )
 
         # Normalize
-        img = img.astype(np.float32) / 255.0
+        resized = resized.astype(
+            np.float32
+        ) / 255.0
 
         # HWC -> CHW
-        img = np.transpose(
-            img,
+        resized = np.transpose(
+            resized,
             (2, 0, 1)
         )
 
-        # Add batch
-        img = np.expand_dims(
-            img,
+        # Add batch dimension
+        resized = np.expand_dims(
+            resized,
             axis=0
         )
 
-        # ==============================
+        # -------------------------------------------------
         # YOLO inference
-        # ==============================
+        # -------------------------------------------------
 
         print("Running ONNX detection...")
 
         outputs = session.run(
             None,
             {
-                input_name: img
+                input_name: resized
             }
         )
 
         predictions = outputs[0]
 
-        # YOLO11 output:
-        # (1, 84, 2100)
+        print(
+            "Raw output shape:",
+            predictions.shape
+        )
+
+        # -------------------------------------------------
+        # Convert output shape
+        # -------------------------------------------------
 
         predictions = np.squeeze(
             predictions
         )
 
+        # YOLO output normally:
+        # (84, 2100)
+        # Convert to:
+        # (2100, 84)
+
+        if predictions.ndim != 2:
+            raise RuntimeError(
+                "Unexpected YOLO output shape"
+            )
+
         if predictions.shape[0] < predictions.shape[1]:
             predictions = predictions.T
 
-        detections = []
+        print(
+            "Processed output shape:",
+            predictions.shape
+        )
 
-        # ==============================
-        # Process detections
-        # ==============================
+        # -------------------------------------------------
+        # Detection settings
+        # -------------------------------------------------
+
+        CONFIDENCE_THRESHOLD = 0.20
+        NMS_THRESHOLD = 0.45
+
+        boxes = []
+        scores = []
+        class_ids = []
+
+        # -------------------------------------------------
+        # Process YOLO predictions
+        # -------------------------------------------------
 
         for prediction in predictions:
 
+            # First 4 values:
+            # x, y, width, height
+
             x, y, w, h = prediction[:4]
 
+            # Remaining values:
+            # class probabilities
+
             class_scores = prediction[4:]
+
+            if len(class_scores) == 0:
+                continue
 
             class_id = int(
                 np.argmax(class_scores)
@@ -193,49 +242,274 @@ def detect():
                 class_scores[class_id]
             )
 
-            if confidence < 0.25:
+            if confidence < CONFIDENCE_THRESHOLD:
                 continue
 
-            # Convert coordinates
+            # -------------------------------------------------
+            # Convert YOLO coordinates
+            # -------------------------------------------------
+
             x1 = int(
-                (x - w / 2) * width / 320
+                (x - w / 2)
+                * original_width
+                / INPUT_SIZE
             )
 
             y1 = int(
-                (y - h / 2) * height / 320
+                (y - h / 2)
+                * original_height
+                / INPUT_SIZE
             )
 
             x2 = int(
-                (x + w / 2) * width / 320
+                (x + w / 2)
+                * original_width
+                / INPUT_SIZE
             )
 
             y2 = int(
-                (y + h / 2) * height / 320
+                (y + h / 2)
+                * original_height
+                / INPUT_SIZE
             )
 
-            # Keep inside image
-            x1 = max(0, min(x1, width - 1))
-            y1 = max(0, min(y1, height - 1))
-            x2 = max(0, min(x2, width - 1))
-            y2 = max(0, min(y2, height - 1))
+            # -------------------------------------------------
+            # Clamp coordinates
+            # -------------------------------------------------
 
-            detections.append({
-                "name": CLASS_NAMES[class_id],
-                "confidence": round(
-                    confidence * 100,
-                    2
-                ),
-                "x1": x1,
-                "y1": y1,
-                "x2": x2,
-                "y2": y2
-            })
+            x1 = max(
+                0,
+                min(x1, original_width - 1)
+            )
 
-        # ==============================
+            y1 = max(
+                0,
+                min(y1, original_height - 1)
+            )
+
+            x2 = max(
+                0,
+                min(x2, original_width - 1)
+            )
+
+            y2 = max(
+                0,
+                min(y2, original_height - 1)
+            )
+
+            box_width = x2 - x1
+            box_height = y2 - y1
+
+            if box_width <= 0 or box_height <= 0:
+                continue
+
+            boxes.append([
+                x1,
+                y1,
+                box_width,
+                box_height
+            ])
+
+            scores.append(confidence)
+            class_ids.append(class_id)
+
+        # -------------------------------------------------
+        # Non-Maximum Suppression
+        # -------------------------------------------------
+
+        selected = cv2.dnn.NMSBoxes(
+            boxes,
+            scores,
+            CONFIDENCE_THRESHOLD,
+            NMS_THRESHOLD
+        )
+
+        detections = []
+
+        if len(selected) > 0:
+
+            selected = np.array(
+                selected
+            ).reshape(-1)
+
+            for index in selected:
+
+                class_id = class_ids[index]
+
+                x1 = boxes[index][0]
+                y1 = boxes[index][1]
+                box_width = boxes[index][2]
+                box_height = boxes[index][3]
+
+                x2 = x1 + box_width
+                y2 = y1 + box_height
+
+                confidence = scores[index]
+
+                # Safety check
+                if class_id < 0 or class_id >= len(CLASS_NAMES):
+                    continue
+
+                detections.append({
+                    "name": CLASS_NAMES[class_id],
+                    "confidence": round(
+                        confidence * 100,
+                        2
+                    ),
+                    "x1": int(x1),
+                    "y1": int(y1),
+                    "x2": int(x2),
+                    "y2": int(y2)
+                })
+
+        # -------------------------------------------------
         # Draw boxes
-        # ==============================
+        # -------------------------------------------------
+
+        annotated = original.copy()
 
         for detection in detections:
 
             x1 = detection["x1"]
-            y1 =
+            y1 = detection["y1"]
+            x2 = detection["x2"]
+            y2 = detection["y2"]
+
+            name = detection["name"]
+
+            confidence = detection["confidence"]
+
+            # Bounding box
+            cv2.rectangle(
+                annotated,
+                (x1, y1),
+                (x2, y2),
+                (0, 255, 0),
+                2
+            )
+
+            label = (
+                f"{name} "
+                f"{confidence:.1f}%"
+            )
+
+            # Label background
+            (text_width, text_height), baseline = (
+                cv2.getTextSize(
+                    label,
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    2
+                )
+            )
+
+            label_y = max(
+                y1,
+                text_height + baseline
+            )
+
+            cv2.rectangle(
+                annotated,
+                (
+                    x1,
+                    label_y - text_height - baseline
+                ),
+                (
+                    x1 + text_width,
+                    label_y
+                ),
+                (0, 255, 0),
+                -1
+            )
+
+            cv2.putText(
+                annotated,
+                label,
+                (
+                    x1,
+                    label_y - baseline
+                ),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.6,
+                (0, 0, 0),
+                2
+            )
+
+        # -------------------------------------------------
+        # Encode image
+        # -------------------------------------------------
+
+        success, buffer = cv2.imencode(
+            ".jpg",
+            annotated,
+            [
+                int(cv2.IMWRITE_JPEG_QUALITY),
+                65
+            ]
+        )
+
+        if not success:
+            raise RuntimeError(
+                "Could not encode result image"
+            )
+
+        # -------------------------------------------------
+        # Base64 image
+        # -------------------------------------------------
+
+        import base64
+
+        encoded_image = base64.b64encode(
+            buffer.tobytes()
+        ).decode("utf-8")
+
+        # -------------------------------------------------
+        # Final response
+        # -------------------------------------------------
+
+        print(
+            "Detection completed:",
+            len(detections),
+            "objects"
+        )
+
+        return jsonify({
+            "success": True,
+            "count": len(detections),
+            "detections": detections,
+            "image": (
+                "data:image/jpeg;base64,"
+                + encoded_image
+            )
+        })
+
+    except Exception as e:
+
+        print(
+            "DETECTION ERROR:",
+            repr(e)
+        )
+
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+# =========================================================
+# RUN
+# =========================================================
+
+if __name__ == "__main__":
+
+    port = int(
+        os.environ.get(
+            "PORT",
+            "10000"
+        )
+    )
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+)
