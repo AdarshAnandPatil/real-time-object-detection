@@ -1,0 +1,12 @@
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f4f7fb;color:#1d2939}
+header{background:#243b53;color:white;text-align:center;padding:24px 12px}
+header h1{margin:0 0 7px;font-size:28px}header p{margin:0}
+main{max-width:950px;margin:24px auto;padding:0 15px}.card{background:white;border-radius:16px;padding:20px;margin-bottom:20px;box-shadow:0 5px 18px #00000014}
+.camera{position:relative;background:#111;border-radius:14px;overflow:hidden;min-height:300px;text-align:center}
+video{width:100%;display:block}.camera span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:white;font-size:18px}
+.buttons{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
+button,label{background:#2878b5;color:white;border:0;border-radius:9px;padding:13px 18px;font-size:16px;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}label input{display:none}
+#status{text-align:center;font-weight:bold}#result{display:none;max-width:100%;border-radius:12px}
+#items{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.item{background:#eef5fb;border-radius:10px;padding:12px}@media(max-width:600px){button,label{width:100%;text-align:center}header h1{font-size:23px}}
