@@ -1,361 +1,208 @@
-document.addEventListener("DOMContentLoaded", function () {
+const camera = document.getElementById("camera");
+const msg = document.getElementById("msg");
+const startBtn = document.getElementById("start");
+const stopBtn = document.getElementById("stop");
+const upload = document.getElementById("upload");
 
-    const camera = document.getElementById("camera");
-    const startButton = document.getElementById("start");
-    const stopButton = document.getElementById("stop");
-    const upload = document.getElementById("upload");
+const resultImage = document.getElementById("result");
+const count = document.getElementById("count");
+const items = document.getElementById("items");
+const statusText = document.getElementById("status");
 
-    const msg = document.getElementById("msg");
-    const status = document.getElementById("status");
+let stream = null;
 
-    const resultImage = document.getElementById("result");
-    const count = document.getElementById("count");
-    const items = document.getElementById("items");
+// ===============================
+// START CAMERA
+// ===============================
 
-    let stream = null;
-    let detecting = false;
-    let detectionTimer = null;
+startBtn.addEventListener("click", async () => {
+    try {
+        statusText.textContent = "Starting camera...";
 
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: "environment",
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            },
+            audio: false
+        });
 
-    // =====================================
-    // START CAMERA
-    // =====================================
+        camera.srcObject = stream;
 
-    startButton.addEventListener("click", async function () {
+        msg.style.display = "none";
 
-        try {
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
 
-            stream = await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: "environment",
-                    width: { ideal: 640 },
-                    height: { ideal: 480 }
-                },
-                audio: false
-            });
+        statusText.textContent =
+            "Camera started. Point it at an object.";
 
-            camera.srcObject = stream;
+    } catch (error) {
+        console.error("Camera error:", error);
 
-            msg.style.display = "none";
+        statusText.textContent =
+            "❌ Camera access denied. Please allow camera permission.";
+    }
+});
 
-            startButton.disabled = true;
-            stopButton.disabled = false;
 
-            status.textContent =
-                "Camera started. Detecting objects...";
+// ===============================
+// STOP CAMERA
+// ===============================
 
-            // Start detection every 2 seconds
-            detecting = true;
+stopBtn.addEventListener("click", () => {
 
-            detectCameraFrame();
+    if (stream) {
 
-            detectionTimer = setInterval(
-                detectCameraFrame,
-                2000
-            );
+        stream.getTracks().forEach(track => {
+            track.stop();
+        });
 
-        } catch (error) {
-
-            console.error(error);
-
-            status.textContent =
-                "❌ Camera access denied or unavailable.";
-
-            alert(
-                "Please allow camera permission in your browser."
-            );
-        }
-
-    });
-
-
-    // =====================================
-    // STOP CAMERA
-    // =====================================
-
-    stopButton.addEventListener("click", function () {
-
-        detecting = false;
-
-        if (detectionTimer) {
-            clearInterval(detectionTimer);
-            detectionTimer = null;
-        }
-
-        if (stream) {
-
-            stream.getTracks().forEach(
-                track => track.stop()
-            );
-
-            stream = null;
-        }
-
-        camera.srcObject = null;
-
-        msg.style.display = "block";
-
-        startButton.disabled = false;
-        stopButton.disabled = true;
-
-        status.textContent =
-            "Camera stopped.";
-
-    });
-
-
-    // =====================================
-    // CAMERA FRAME DETECTION
-    // =====================================
-
-    async function detectCameraFrame() {
-
-        if (!detecting || !stream) {
-            return;
-        }
-
-        if (camera.readyState < 2) {
-            return;
-        }
-
-        // Don't send another request if one is already running
-        if (detectCameraFrame.busy) {
-            return;
-        }
-
-        detectCameraFrame.busy = true;
-
-        try {
-
-            const canvas =
-                document.createElement("canvas");
-
-            canvas.width = 640;
-            canvas.height = 480;
-
-            const context =
-                canvas.getContext("2d");
-
-            context.drawImage(
-                camera,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-            const blob =
-                await new Promise(resolve => {
-
-                    canvas.toBlob(
-                        resolve,
-                        "image/jpeg",
-                        0.65
-                    );
-
-                });
-
-            const formData =
-                new FormData();
-
-            formData.append(
-                "file",
-                blob,
-                "camera.jpg"
-            );
-
-            const response =
-                await fetch("/detect", {
-                    method: "POST",
-                    body: formData
-                });
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "Server returned HTTP " +
-                    response.status
-                );
-            }
-
-            const data =
-                await response.json();
-
-            if (!data.success) {
-
-                throw new Error(
-                    data.error ||
-                    "Detection failed."
-                );
-            }
-
-            showResults(data);
-
-            status.textContent =
-                "✅ Detection updated.";
-
-        } catch (error) {
-
-            console.error(
-                "Camera detection error:",
-                error
-            );
-
-            status.textContent =
-                "⚠️ Detection temporarily unavailable.";
-
-        } finally {
-
-            detectCameraFrame.busy = false;
-
-        }
+        stream = null;
     }
 
+    camera.srcObject = null;
 
-    // =====================================
-    // UPLOAD IMAGE
-    // =====================================
+    msg.style.display = "block";
 
-    upload.addEventListener(
-        "change",
-        async function () {
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
 
-            const file =
-                this.files[0];
+    statusText.textContent =
+        "Camera stopped.";
+});
 
-            if (!file) {
-                return;
-            }
 
-            status.textContent =
-                "🔄 Analyzing uploaded image...";
+// ===============================
+// IMAGE UPLOAD
+// ===============================
 
-            count.textContent =
-                "Analyzing...";
+upload.addEventListener("change", async () => {
 
-            items.innerHTML = "";
+    const file = upload.files[0];
 
-            try {
+    if (!file) {
+        return;
+    }
 
-                const formData =
-                    new FormData();
+    statusText.textContent =
+        "⏳ Analyzing image... Please wait.";
 
-                formData.append(
-                    "file",
-                    file
-                );
+    count.textContent =
+        "Analyzing...";
 
-                const response =
-                    await fetch("/detect", {
-                        method: "POST",
-                        body: formData
-                    });
+    items.innerHTML = "";
 
-                if (!response.ok) {
+    resultImage.style.display = "none";
 
-                    throw new Error(
-                        "Server returned HTTP " +
-                        response.status
-                    );
-                }
+    const formData = new FormData();
 
-                const data =
-                    await response.json();
+    formData.append("file", file);
 
-                if (!data.success) {
+    try {
 
-                    throw new Error(
-                        data.error ||
-                        "Detection failed."
-                    );
-                }
+        const response = await fetch("/detect", {
+            method: "POST",
+            body: formData
+        });
 
-                showResults(data);
+        // Check server response
+        if (!response.ok) {
 
-                status.textContent =
-                    "✅ Image analyzed successfully.";
+            const errorText = await response.text();
 
-            } catch (error) {
+            console.error(
+                "Server error:",
+                response.status,
+                errorText
+            );
 
-                console.error(
-                    "Upload detection error:",
-                    error
-                );
-
-                count.textContent =
-                    "❌ " + error.message;
-
-                status.textContent =
-                    "❌ Could not analyze image.";
-
-            }
-
+            throw new Error(
+                "Server returned HTTP " + response.status
+            );
         }
-    );
 
+        const data = await response.json();
 
-    // =====================================
-    // SHOW RESULTS
-    // =====================================
+        console.log("Detection response:", data);
 
-    function showResults(data) {
+        if (!data.success) {
 
-        // Show annotated image
+            throw new Error(
+                data.error || "Detection failed"
+            );
+        }
+
+        // ===============================
+        // SHOW RESULT IMAGE
+        // ===============================
+
         if (data.image) {
 
-            resultImage.src =
-                data.image;
-
-            resultImage.style.display =
-                "block";
+            resultImage.src = data.image;
+            resultImage.style.display = "block";
         }
 
+        // ===============================
+        // SHOW COUNT
+        // ===============================
 
-        // Number of objects
         count.textContent =
+            "✅ Detected " +
             data.count +
-            " object(s) detected";
+            " object(s)";
 
 
-        // Clear old results
+        // ===============================
+        // SHOW OBJECTS
+        // ===============================
+
         items.innerHTML = "";
 
+        if (data.detections && data.detections.length > 0) {
 
-        if (
-            !data.detections ||
-            data.detections.length === 0
-        ) {
+            data.detections.forEach((object) => {
 
-            items.innerHTML =
-                "<p>No recognizable objects detected.</p>";
+                const div = document.createElement("div");
 
-            return;
-        }
+                div.className = "detection-item";
 
-
-        // Display objects
-        data.detections.forEach(
-            function (object) {
-
-                const div =
-                    document.createElement("div");
-
-                div.className =
-                    "detection-item";
-
-                div.innerHTML =
-                    "<strong>" +
+                div.textContent =
+                    "🔹 " +
                     object.name +
-                    "</strong>" +
                     " — " +
                     object.confidence +
                     "%";
 
                 items.appendChild(div);
+            });
 
-            }
+        } else {
+
+            items.innerHTML =
+                "<p>⚠️ No recognizable objects detected.</p>";
+        }
+
+        statusText.textContent =
+            "✅ Detection completed.";
+
+    } catch (error) {
+
+        console.error(
+            "Detection error:",
+            error
         );
 
+        statusText.textContent =
+            "❌ Could not analyze image.";
+
+        count.textContent =
+            "❌ " + error.message;
+
+        items.innerHTML = "";
     }
 
+    // Allow selecting the same image again
+    upload.value = "";
 });
