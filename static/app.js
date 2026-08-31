@@ -16,9 +16,9 @@ let busy = false;
 const canvas = document.createElement("canvas");
 
 
-// ============================================
+// ================================
 // START CAMERA
-// ============================================
+// ================================
 
 startButton.addEventListener("click", async function () {
 
@@ -26,7 +26,7 @@ startButton.addEventListener("click", async function () {
 
         stream = await navigator.mediaDevices.getUserMedia({
             video: {
-                facingMode: { ideal: "environment" }
+                facingMode: "environment"
             },
             audio: false
         });
@@ -41,7 +41,7 @@ startButton.addEventListener("click", async function () {
         cameraMessage.style.display = "none";
 
         statusText.textContent =
-            "Camera running — detecting objects...";
+            "Camera running...";
 
         detectCamera();
 
@@ -50,16 +50,16 @@ startButton.addEventListener("click", async function () {
         console.error(error);
 
         statusText.textContent =
-            "❌ Camera access denied or unavailable.";
+            "❌ Camera access denied.";
 
     }
 
 });
 
 
-// ============================================
+// ================================
 // STOP CAMERA
-// ============================================
+// ================================
 
 stopButton.addEventListener("click", function () {
 
@@ -67,9 +67,9 @@ stopButton.addEventListener("click", function () {
 
     if (stream) {
 
-        stream.getTracks().forEach(function (track) {
-            track.stop();
-        });
+        stream.getTracks().forEach(
+            track => track.stop()
+        );
 
     }
 
@@ -88,58 +88,67 @@ stopButton.addEventListener("click", function () {
 });
 
 
-// ============================================
+// ================================
 // UPLOAD IMAGE
-// ============================================
+// ================================
 
-uploadInput.addEventListener("change", function () {
+uploadInput.addEventListener(
+    "change",
+    function () {
 
-    const file = this.files[0];
+        const file = this.files[0];
 
-    if (!file) {
-        return;
+        if (!file) return;
+
+        statusText.textContent =
+            "Analyzing image...";
+
+        detectImage(file);
+
     }
-
-    statusText.textContent =
-        "Analyzing uploaded image...";
-
-    detectImage(file);
-
-});
+);
 
 
-// ============================================
-// CAMERA DETECTION
-// ============================================
+// ================================
+// CAMERA LOOP
+// ================================
 
 async function detectCamera() {
 
     while (detecting) {
 
-        if (!busy && video.videoWidth > 0) {
+        if (
+            !busy &&
+            video.videoWidth > 0
+        ) {
 
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            canvas.width =
+                640;
 
-            const context = canvas.getContext("2d");
+            canvas.height =
+                360;
+
+            const context =
+                canvas.getContext("2d");
 
             context.drawImage(
                 video,
                 0,
                 0,
-                canvas.width,
-                canvas.height
+                640,
+                360
             );
 
-            const blob = await new Promise(function (resolve) {
+            const blob =
+                await new Promise(resolve => {
 
-                canvas.toBlob(
-                    resolve,
-                    "image/jpeg",
-                    0.65
-                );
+                    canvas.toBlob(
+                        resolve,
+                        "image/jpeg",
+                        0.55
+                    );
 
-            });
+                });
 
             if (blob) {
 
@@ -149,33 +158,32 @@ async function detectCamera() {
 
         }
 
-        // Wait before sending another frame.
-        // This prevents Render from being overloaded.
+        // Important:
+        // Wait before sending next frame.
 
-        await new Promise(function (resolve) {
-            setTimeout(resolve, 1500);
-        });
+        await new Promise(resolve =>
+            setTimeout(resolve, 2000)
+        );
 
     }
 
 }
 
 
-// ============================================
-// SEND IMAGE TO FLASK
-// ============================================
+// ================================
+// DETECT IMAGE
+// ================================
 
 async function detectImage(file) {
 
-    if (busy) {
-        return;
-    }
+    if (busy) return;
 
     busy = true;
 
     try {
 
-        const formData = new FormData();
+        const formData =
+            new FormData();
 
         formData.append(
             "file",
@@ -183,46 +191,34 @@ async function detectImage(file) {
             "image.jpg"
         );
 
-
-        console.log("Sending image to /detect...");
-
-
-        // IMPORTANT:
-        // Flask app.py uses /detect
-
-        const response = await fetch(
-            "/detect",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
-
-
         console.log(
-            "Server response:",
-            response.status
+            "Sending image to /detect"
         );
 
+        const response =
+            await fetch(
+                "/detect",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
 
-        // Read response as text first.
-        // This prevents the <!DOCTYPE> JSON error.
-
-        const responseText =
+        const text =
             await response.text();
-
 
         let data;
 
         try {
 
-            data = JSON.parse(responseText);
+            data =
+                JSON.parse(text);
 
-        } catch (jsonError) {
+        } catch {
 
             console.error(
-                "Server returned:",
-                responseText
+                "Server response:",
+                text
             );
 
             throw new Error(
@@ -231,93 +227,64 @@ async function detectImage(file) {
 
         }
 
-
-        if (!response.ok || !data.success) {
+        if (
+            !response.ok ||
+            !data.success
+        ) {
 
             throw new Error(
-                data.error || "Object detection failed."
+                data.error ||
+                "Detection failed."
             );
 
         }
 
 
-        // ========================================
-        // SHOW RESULT IMAGE
-        // ========================================
+        // ================================
+        // RESULTS
+        // ================================
 
-        resultImage.src = data.image;
-
-        resultImage.style.display = "block";
-
-
-        // ========================================
-        // SHOW COUNT
-        // ========================================
-
-        if (data.count > 0) {
-
-            countText.textContent =
-                data.count +
-                " object(s) detected";
-
-        } else {
-
-            countText.textContent =
-                "No objects detected.";
-
-        }
-
-
-        // ========================================
-        // SHOW OBJECTS
-        // ========================================
+        countText.textContent =
+            data.count +
+            " object(s) detected";
 
         itemsContainer.innerHTML = "";
 
 
-        data.detections.forEach(function (object) {
+        data.detections.forEach(
+            object => {
 
-            const item =
-                document.createElement("div");
+                const item =
+                    document.createElement("div");
 
-            item.className = "item";
+                item.className =
+                    "item";
 
-            item.innerHTML =
-                "<b>" +
-                object.name +
-                "</b><br>" +
-                object.confidence +
-                "% confidence";
+                item.innerHTML =
+                    "<b>" +
+                    object.name +
+                    "</b><br>" +
+                    object.confidence +
+                    "% confidence";
 
-            itemsContainer.appendChild(item);
+                itemsContainer.appendChild(
+                    item
+                );
 
-        });
-
-
-        if (detecting) {
-
-            statusText.textContent =
-                "Live detection active.";
-
-        } else {
-
-            statusText.textContent =
-                "Image detection completed.";
-
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            "Detection error:",
-            error
+            }
         );
 
 
         statusText.textContent =
-            "❌ " + error.message;
+            "✅ Detection completed.";
 
+
+    } catch (error) {
+
+        console.error(error);
+
+        statusText.textContent =
+            "❌ " + error.message;
 
     } finally {
 
