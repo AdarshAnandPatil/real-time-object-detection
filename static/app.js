@@ -14,6 +14,8 @@ const count = document.getElementById("count");
 const items = document.getElementById("items");
 const statusText = document.getElementById("status");
 
+const dashboard = document.getElementById("objectDashboard");
+
 let stream = null;
 
 
@@ -25,21 +27,14 @@ startBtn.addEventListener("click", async () => {
 
     try {
 
-        statusText.textContent =
-            "⏳ Starting camera...";
+        statusText.textContent = "⏳ Starting camera...";
 
         stream = await navigator.mediaDevices.getUserMedia({
-
             video: {
                 facingMode: "environment",
-                width: {
-                    ideal: 640
-                },
-                height: {
-                    ideal: 480
-                }
+                width: { ideal: 640 },
+                height: { ideal: 480 }
             },
-
             audio: false
         });
 
@@ -52,19 +47,15 @@ startBtn.addEventListener("click", async () => {
         stopBtn.disabled = false;
 
         statusText.textContent =
-            "✅ Camera started. Point it at an object and capture.";
+            "✅ Camera started. Point at an object and click Capture Photo.";
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.error("Camera error:", error);
 
         statusText.textContent =
             "❌ Camera access denied. Please allow camera permission.";
-
     }
-
 });
 
 
@@ -82,25 +73,16 @@ captureBtn.addEventListener("click", () => {
         return;
     }
 
-
-    // Make sure video has loaded
-
     if (camera.videoWidth === 0 || camera.videoHeight === 0) {
 
         statusText.textContent =
-            "⏳ Camera is not ready yet. Try again.";
+            "⏳ Camera is not ready. Try again.";
 
         return;
     }
 
-
-    // Set canvas size to camera size
-
     canvas.width = camera.videoWidth;
     canvas.height = camera.videoHeight;
-
-
-    // Capture current frame
 
     const context = canvas.getContext("2d");
 
@@ -112,12 +94,8 @@ captureBtn.addEventListener("click", () => {
         canvas.height
     );
 
-
     statusText.textContent =
-        "⏳ Captured photo. Sending to AI...";
-
-
-    // Convert canvas to JPEG
+        "⏳ Photo captured. Sending to AI...";
 
     canvas.toBlob(
         (blob) => {
@@ -130,7 +108,6 @@ captureBtn.addEventListener("click", () => {
                 return;
             }
 
-
             const file = new File(
                 [blob],
                 "camera-capture.jpg",
@@ -139,14 +116,11 @@ captureBtn.addEventListener("click", () => {
                 }
             );
 
-
             detectImage(file);
-
         },
         "image/jpeg",
         0.85
     );
-
 });
 
 
@@ -162,7 +136,7 @@ function stopCamera() {
     if (stream) {
 
         stream.getTracks().forEach(
-            (track) => track.stop()
+            track => track.stop()
         );
 
         stream = null;
@@ -178,15 +152,14 @@ function stopCamera() {
 
     statusText.textContent =
         "Camera stopped.";
-
 }
 
 
 // =====================================================
-// IMAGE UPLOAD
+// UPLOAD IMAGE
 // =====================================================
 
-upload.addEventListener("change", async () => {
+upload.addEventListener("change", () => {
 
     const file = upload.files[0];
 
@@ -196,15 +169,12 @@ upload.addEventListener("change", async () => {
 
     detectImage(file);
 
-    // Allow selecting same image again
-
     upload.value = "";
-
 });
 
 
 // =====================================================
-// SEND IMAGE TO SERVER
+// DETECT IMAGE
 // =====================================================
 
 async function detectImage(file) {
@@ -222,10 +192,7 @@ async function detectImage(file) {
 
     const formData = new FormData();
 
-    formData.append(
-        "file",
-        file
-    );
+    formData.append("file", file);
 
 
     try {
@@ -304,7 +271,7 @@ async function detectImage(file) {
 
 
         // =================================================
-        // SHOW OBJECTS
+        // SHOW DETECTION RESULTS
         // =================================================
 
         items.innerHTML = "";
@@ -316,75 +283,72 @@ async function detectImage(file) {
         ) {
 
             data.detections.forEach(
-                (object) => {
+                object => {
 
                     const div =
                         document.createElement("div");
 
-                    div.className =
-                        "item";
-
+                    div.className = "item";
 
                     div.textContent =
                         "🔹 " +
-                        formatObjectName(
-                            object.name
-                        ) +
+                        formatObjectName(object.name) +
                         " — " +
                         object.confidence +
                         "%";
 
-
                     items.appendChild(div);
-
                 }
             );
 
 
             // =================================================
-            // VOICE OUTPUT
+            // VOICE
             // =================================================
 
             speakDetections(
                 data.detections
             );
 
-        }
 
-        else {
+            // =================================================
+            // UPDATE DASHBOARD
+            // =================================================
+
+            updateDashboard(
+                data.detections
+            );
+
+        } else {
 
             items.innerHTML =
-                "<p>⚠️ No recognizable objects detected.</p>";
+                "<p>⚠️ No recognizable supported objects detected.</p>";
 
+            statusText.textContent =
+                "⚠️ No supported object detected.";
         }
 
 
         statusText.textContent =
             "✅ Detection completed.";
 
-    }
 
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Detection error:",
             error
         );
 
-
         statusText.textContent =
             "❌ Could not analyze image.";
-
 
         count.textContent =
             "❌ " +
             error.message;
 
-
         items.innerHTML = "";
-
     }
-
 }
 
 
@@ -393,8 +357,6 @@ async function detectImage(file) {
 // =====================================================
 
 function speakDetections(detections) {
-
-    // Check browser support
 
     if (!("speechSynthesis" in window)) {
 
@@ -405,38 +367,36 @@ function speakDetections(detections) {
         return;
     }
 
-
-    // Stop previous speech
-
     window.speechSynthesis.cancel();
 
 
-    const names =
-        detections.map(
-            (object) =>
-                formatObjectName(
-                    object.name
-                )
-        );
+    const uniqueNames = [];
+
+    detections.forEach(object => {
+
+        const name =
+            formatObjectName(object.name);
+
+        if (!uniqueNames.includes(name)) {
+
+            uniqueNames.push(name);
+        }
+    });
 
 
     let message;
 
-
-    if (names.length === 1) {
-
-        message =
-            names[0] +
-            " detected.";
-
-    }
-
-    else {
+    if (uniqueNames.length === 1) {
 
         message =
-            names.join(", ") +
+            uniqueNames[0] +
             " detected.";
 
+    } else {
+
+        message =
+            uniqueNames.join(", ") +
+            " detected.";
     }
 
 
@@ -451,15 +411,13 @@ function speakDetections(detections) {
     speech.volume = 1;
 
 
-    // Try to use English voice
-
     const voices =
         window.speechSynthesis.getVoices();
 
 
     const englishVoice =
         voices.find(
-            (voice) =>
+            voice =>
                 voice.lang &&
                 voice.lang
                     .toLowerCase()
@@ -471,14 +429,92 @@ function speakDetections(detections) {
 
         speech.voice =
             englishVoice;
-
     }
 
 
     window.speechSynthesis.speak(
         speech
     );
+}
 
+
+// =====================================================
+// UPDATE DASHBOARD
+// =====================================================
+
+function updateDashboard(detections) {
+
+    if (!dashboard) {
+        return;
+    }
+
+
+    // Count detected objects
+
+    const counts = {};
+
+
+    detections.forEach(object => {
+
+        const name =
+            formatObjectName(object.name);
+
+        counts[name] =
+            (counts[name] || 0) + 1;
+    });
+
+
+    // Find dashboard items
+
+    const dashboardItems =
+        dashboard.querySelectorAll(".item");
+
+
+    dashboardItems.forEach(item => {
+
+        const originalText =
+            item.dataset.originalText ||
+            item.textContent.trim();
+
+
+        item.dataset.originalText =
+            originalText;
+
+
+        // Extract object name after number
+
+        const objectName =
+            originalText
+                .replace(/^\d+\.\s*/, "")
+                .trim();
+
+
+        const detectedCount =
+            counts[objectName] || 0;
+
+
+        if (detectedCount > 0) {
+
+            item.innerHTML =
+                "<b>" +
+                originalText.split(".")[0] +
+                ".</b> " +
+                objectName +
+                " <strong>✅ Detected: " +
+                detectedCount +
+                "</strong>";
+
+        } else {
+
+            item.innerHTML =
+                "<b>" +
+                originalText.split(".")[0] +
+                ".</b> " +
+                objectName +
+                " <span>— Not detected</span>";
+        }
+
+    });
 }
 
 
@@ -489,16 +525,16 @@ function speakDetections(detections) {
 function formatObjectName(name) {
 
     if (!name) {
+
         return "Unknown object";
     }
 
 
     return name
         .replace(/_/g, " ")
-        .replace(/\b\w/g, (letter) =>
+        .replace(/\b\w/g, letter =>
             letter.toUpperCase()
         );
-
 }
 
 
@@ -512,7 +548,5 @@ if ("speechSynthesis" in window) {
         () => {
 
             window.speechSynthesis.getVoices();
-
         };
-
 }
