@@ -1,1 +1,37 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Real-Time Object Detection</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><h1>Real-Time Object Detection</h1><p>Camera → AI → Object Detection</p></header>
+<main>
+<section class="card">
+<div class="camera"><video id="camera" autoplay playsinline muted></video><span id="msg">Camera is off</span></div>
+<div class="buttons">
+<button id="start">📷 Start Camera</button>
+<button id="stop" disabled>⏹ Stop Camera</button>
+<label>📁 Upload Image<input id="upload" type="file" accept="image/*"></label>
+</div>
+<p id="status">Press Start Camera to begin.</p>
+</section>
+<section class="card">
+<h2>Detection Result</h2>
+<img id="result" alt="Detection result">
+<p id="count">No detections yet.</p>
+<div id="items"></div>
+</section>
+<section class="card">
+<h2>How it works</h2>
+<ol><li>Allow camera permission.</li><li>Point the camera at objects.</li>
+<li>Frames are sent to the AI model.</li><li>YOLO draws bounding boxes.</li>
+<li>Names and confidence are shown automatically.</li></ol>
+<p><b>Model:</b> YOLO11n (COCO)</p>
+</section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>
