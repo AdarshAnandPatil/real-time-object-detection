@@ -1,6 +1,6 @@
 /* =========================================================
    REAL-TIME OBJECT DETECTION
-   MODERN AI UI DESIGN
+   COMPLETE MODERN AI UI DESIGN
    UI ONLY - FUNCTIONALITY NOT CHANGED
 ========================================================= */
 
@@ -20,7 +20,9 @@ html {
 
 
 body {
+
     margin: 0;
+
     font-family:
         "Segoe UI",
         Arial,
@@ -29,6 +31,7 @@ body {
     color: #2d2440;
 
     background:
+
         radial-gradient(
             circle at top left,
             rgba(255, 214, 102, 0.30),
@@ -89,13 +92,14 @@ header {
         );
 
     box-shadow:
+
         0 10px 30px
         rgba(80, 40, 100, 0.25);
 
 }
 
 
-/* Decorative circles */
+/* Decorative Circle */
 
 header::before {
 
@@ -110,7 +114,7 @@ header::before {
     border-radius: 50%;
 
     background:
-        rgba(255,255,255,0.12);
+        rgba(255, 255, 255, 0.12);
 
     top: -100px;
 
@@ -118,6 +122,8 @@ header::before {
 
 }
 
+
+/* AI Robot Decoration */
 
 header::after {
 
@@ -133,13 +139,14 @@ header::after {
 
     opacity: 0.15;
 
-    transform: rotate(-10deg);
+    transform:
+        rotate(-10deg);
 
 }
 
 
 /* =========================================================
-   TITLE
+   HEADER TITLE
 ========================================================= */
 
 header h1 {
@@ -148,9 +155,13 @@ header h1 {
 
     z-index: 1;
 
-    margin: 0 0 12px;
+    margin:
+        0
+        0
+        12px;
 
     font-size:
+
         clamp(
             30px,
             5vw,
@@ -164,10 +175,12 @@ header h1 {
     text-shadow:
 
         0 3px 12px
-        rgba(0,0,0,0.18);
+        rgba(0, 0, 0, 0.18);
 
 }
 
+
+/* AI Eye Icon */
 
 header h1::before {
 
@@ -178,6 +191,8 @@ header h1::before {
 }
 
 
+/* Header Subtitle */
+
 header p {
 
     position: relative;
@@ -187,6 +202,7 @@ header p {
     margin: 0;
 
     font-size:
+
         clamp(
             15px,
             2vw,
@@ -206,10 +222,12 @@ header p {
 
 main {
 
-    width: min(
-        1100px,
-        calc(100% - 30px)
-    );
+    width:
+
+        min(
+            1100px,
+            calc(100% - 30px)
+        );
 
     margin:
 
@@ -221,7 +239,7 @@ main {
 
 
 /* =========================================================
-   CARDS
+   GENERAL CARDS
 ========================================================= */
 
 .card {
@@ -278,7 +296,7 @@ main {
 }
 
 
-/* Card hover */
+/* Card Hover */
 
 .card:hover {
 
@@ -328,7 +346,7 @@ main {
 }
 
 
-/* Gradient underline */
+/* Gradient Underline */
 
 .card h2::after {
 
@@ -424,7 +442,7 @@ main {
         0
         0
         50px
-        rgba(0,0,0,0.35),
+        rgba(0, 0, 0, 0.35),
 
         0 12px 25px
         rgba(70, 40, 90, 0.20);
@@ -432,7 +450,7 @@ main {
 }
 
 
-/* AI scanning decoration */
+/* AI Scan Line */
 
 .camera::before {
 
@@ -518,7 +536,9 @@ main {
 }
 
 
-/* Video */
+/* =========================================================
+   CAMERA VIDEO
+========================================================= */
 
 video {
 
@@ -540,7 +560,9 @@ video {
 }
 
 
-/* Camera message */
+/* =========================================================
+   CAMERA MESSAGE
+========================================================= */
 
 .camera span {
 
@@ -574,9 +596,9 @@ video {
 
             circle,
 
-            rgba(100,70,120,0.20),
+            rgba(100, 70, 120, 0.20),
 
-            rgba(15,10,20,0.70)
+            rgba(15, 10, 20, 0.70)
 
         );
 
@@ -668,7 +690,7 @@ label {
 }
 
 
-/* Button shine */
+/* Button Shine */
 
 button::before,
 label::before {
@@ -738,7 +760,9 @@ label:active {
 }
 
 
-/* Disabled button */
+/* =========================================================
+   DISABLED BUTTON
+========================================================= */
 
 button:disabled {
 
@@ -757,7 +781,9 @@ button:disabled {
 }
 
 
-/* Hide file input */
+/* =========================================================
+   FILE INPUT
+========================================================= */
 
 label input {
 
@@ -766,7 +792,9 @@ label input {
 }
 
 
-/* Different button colours */
+/* =========================================================
+   CAPTURE BUTTON
+========================================================= */
 
 #capture {
 
@@ -783,10 +811,14 @@ label input {
     box-shadow:
 
         0 7px 16px
-        rgba(231,111,81,0.25);
+        rgba(231, 111, 81, 0.25);
 
 }
 
+
+/* =========================================================
+   STOP BUTTON
+========================================================= */
 
 #stop {
 
@@ -803,12 +835,14 @@ label input {
     box-shadow:
 
         0 7px 16px
-        rgba(180,60,90,0.22);
+        rgba(180, 60, 90, 0.22);
 
 }
 
 
-/* Upload label */
+/* =========================================================
+   UPLOAD BUTTON
+========================================================= */
 
 label {
 
@@ -825,7 +859,7 @@ label {
     box-shadow:
 
         0 7px 16px
-        rgba(70,150,130,0.25);
+        rgba(70, 150, 130, 0.25);
 
 }
 
@@ -855,9 +889,11 @@ label {
 
     text-align: center;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    font-weight: 650;
+    font-weight:
+        650;
 
     color:
         #6c4c72;
@@ -877,7 +913,7 @@ label {
     border:
 
         1px solid
-        rgba(230,160,100,0.25);
+        rgba(230, 160, 100, 0.25);
 
 }
 
@@ -929,7 +965,7 @@ label {
     box-shadow:
 
         0 12px 30px
-        rgba(80,50,90,0.20);
+        rgba(80, 50, 90, 0.20);
 
 }
 
@@ -1025,7 +1061,7 @@ label {
     border:
 
         1px solid
-        rgba(220,150,180,0.18);
+        rgba(220, 150, 180, 0.18);
 
     color:
         #54435b;
@@ -1033,7 +1069,7 @@ label {
     box-shadow:
 
         0 5px 14px
-        rgba(100,70,100,0.07);
+        rgba(100, 70, 100, 0.07);
 
     transition:
 
@@ -1047,187 +1083,12 @@ label {
 .item:hover {
 
     transform:
-
         translateY(-4px);
 
     box-shadow:
 
         0 12px 20px
-        rgba(100,70,100,0.12);
-
-}
-
-
-/* =========================================================
-   OBJECT DASHBOARD
-========================================================= */
-
-#objectDashboard {
-
-    display: grid;
-
-    grid-template-columns:
-
-        repeat(
-            auto-fit,
-            minmax(200px, 1fr)
-        );
-
-    gap:
-        14px;
-
-    margin-top:
-        18px;
-
-}
-
-
-#objectDashboard .item {
-
-    min-height:
-        72px;
-
-    display:
-
-        flex;
-
-    align-items:
-
-        center;
-
-    gap:
-        10px;
-
-    font-size:
-        16px;
-
-    font-weight:
-        600;
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #ffffff,
-
-            #f9f3ff
-
-        );
-
-    border:
-
-        1px solid
-        rgba(150,100,190,0.12);
-
-    border-left:
-
-        5px solid
-        #9b5de5;
-
-}
-
-
-/* Alternating colours */
-
-#objectDashboard .item:nth-child(3n+1) {
-
-    border-left-color:
-        #f4a261;
-
-}
-
-
-#objectDashboard .item:nth-child(3n+2) {
-
-    border-left-color:
-        #5aa897;
-
-}
-
-
-#objectDashboard .item:nth-child(3n) {
-
-    border-left-color:
-        #d65d8c;
-
-}
-
-
-#objectDashboard .item b {
-
-    display:
-
-        inline-flex;
-
-    align-items:
-
-        center;
-
-    justify-content:
-
-        center;
-
-    min-width:
-        32px;
-
-    height:
-        32px;
-
-    border-radius:
-        50%;
-
-    color:
-        white;
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #9b5de5,
-
-            #d65d8c
-
-        );
-
-    font-size:
-        13px;
-
-}
-
-
-/* Dashboard item details */
-
-#objectDashboard .item strong {
-
-    display:
-        block;
-
-    margin-top:
-        6px;
-
-    font-size:
-        14px;
-
-}
-
-
-#objectDashboard .item span {
-
-    display:
-        block;
-
-    margin-top:
-        6px;
-
-    color:
-        #7a6d80;
-
-    font-size:
-        13px;
+        rgba(100, 70, 100, 0.12);
 
 }
 
@@ -1245,8 +1106,7 @@ label {
         0;
 
     margin:
-        20px
-        0;
+        20px 0;
 
     counter-reset:
         steps;
@@ -1293,7 +1153,7 @@ label {
     box-shadow:
 
         0 4px 10px
-        rgba(100,70,100,0.06);
+        rgba(100, 70, 100, 0.06);
 
     transition:
 
@@ -1380,10 +1240,6 @@ strong {
 }
 
 
-/* =========================================================
-   SPECIAL MODEL INFORMATION
-========================================================= */
-
 .card p b {
 
     display:
@@ -1432,6 +1288,1000 @@ strong {
             #d65d8c
 
         );
+
+}
+
+
+/* =========================================================
+   PAGE CARD ANIMATION
+========================================================= */
+
+.card {
+
+    animation:
+
+        cardAppear
+        0.5s ease
+        both;
+
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   AI DETECTABLE OBJECTS SECTION
+===================================================== */
+
+.ai-objects-section {
+
+    margin: 35px 0;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    background:
+
+        radial-gradient(
+            circle at top left,
+            rgba(255, 183, 77, 0.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at bottom right,
+            rgba(186, 104, 200, 0.16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at center right,
+            rgba(77, 182, 172, 0.14),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fff8f0,
+            #f8f4ff,
+            #f2fff9
+        );
+
+    border:
+
+        1px solid
+        rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =====================================================
+   AI SECTION HEADER
+===================================================== */
+
+.ai-objects-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.ai-header-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    min-width: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 38px;
+
+    border-radius: 22px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffb74d,
+            #ff8a65,
+            #ba68c8
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(186, 104, 200, 0.25);
+
+    animation:
+
+        aiFloat
+        3s
+        ease-in-out
+        infinite;
+
+}
+
+
+.ai-small-title {
+
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #8e44ad;
+
+}
+
+
+.ai-objects-header h2 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #2d1b36;
+
+}
+
+
+.ai-objects-header p {
+
+    margin: 8px 0 0;
+
+    max-width: 650px;
+
+    line-height: 1.6;
+
+    color: #666;
+
+}
+
+
+/* =====================================================
+   AI OBJECT GRID
+===================================================== */
+
+.ai-object-grid {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(210px, 1fr)
+        );
+
+    gap: 20px;
+
+}
+
+
+/* =====================================================
+   AI OBJECT CARD
+===================================================== */
+
+.ai-object-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 230px;
+
+    padding: 25px 20px;
+
+    border-radius: 22px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
+    border:
+
+        1px solid
+        rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+
+        transform 0.35s ease,
+
+        box-shadow 0.35s ease;
+
+    text-align: center;
+
+}
+
+
+/* Decorative AI Circle */
+
+.ai-object-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    top: -55px;
+
+    right: -45px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            rgba(255, 183, 77, 0.25),
+
+            rgba(186, 104, 200, 0.15)
+        );
+
+    transition:
+
+        transform
+        0.4s ease;
+
+}
+
+
+/* AI Background Text */
+
+.ai-object-card::after {
+
+    content: "AI";
+
+    position: absolute;
+
+    bottom: 12px;
+
+    right: 15px;
+
+    font-size: 40px;
+
+    font-weight: 900;
+
+    color:
+
+        rgba(
+            0,
+            0,
+            0,
+            0.035
+        );
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =====================================================
+   AI CARD HOVER
+===================================================== */
+
+.ai-object-card:hover {
+
+    transform:
+
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+
+        0 20px 35px
+        rgba(0, 0, 0, 0.14);
+
+}
+
+
+.ai-object-card:hover::before {
+
+    transform:
+        scale(1.5);
+
+}
+
+
+/* =====================================================
+   OBJECT NUMBER
+===================================================== */
+
+.object-number {
+
+    position: absolute;
+
+    z-index: 5;
+
+    top: 15px;
+
+    left: 15px;
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff8a65,
+            #ba68c8
+        );
+
+    box-shadow:
+
+        0 6px 15px
+        rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* =====================================================
+   AI OBJECT ILLUSTRATION
+===================================================== */
+
+.ai-object-illustration {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 105px;
+
+    height: 105px;
+
+    margin:
+
+        10px
+        auto
+        15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 55px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff3e0,
+            #f3e5f5,
+            #e8f5e9
+        );
+
+    box-shadow:
+
+        inset
+        0
+        0
+        15px
+        rgba(255, 255, 255, 0.8),
+
+        0
+        8px
+        20px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+
+        transform
+        0.4s ease;
+
+}
+
+
+.ai-object-card:hover
+.ai-object-illustration {
+
+    transform:
+
+        rotate(-5deg)
+        scale(1.12);
+
+}
+
+
+/* =====================================================
+   OBJECT NAME
+===================================================== */
+
+.ai-object-card h3 {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+
+        8px
+        0
+        6px;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #2d2d2d;
+
+}
+
+
+/* =====================================================
+   OBJECT DESCRIPTION
+===================================================== */
+
+.ai-object-card p {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+
+        0
+        0
+        12px;
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+
+/* =====================================================
+   AI VISION BADGE
+===================================================== */
+
+.ai-object-card span {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: inline-block;
+
+    padding:
+
+        6px
+        13px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    color: #7b1fa2;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f3e5f5,
+            #fff3e0
+        );
+
+    border:
+
+        1px solid
+        rgba(123, 31, 162, 0.12);
+
+}
+
+
+/* =====================================================
+   EXACTLY 20 OBJECT COLOR THEMES
+===================================================== */
+
+
+/* 01 - PERSON */
+
+.ai-object-card.person {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 02 - BIRD */
+
+.ai-object-card.bird {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e3f2fd,
+            #ffffff
+        );
+
+}
+
+
+/* 03 - LAPTOP */
+
+.ai-object-card.laptop {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ede7f6,
+            #ffffff
+        );
+
+}
+
+
+/* 04 - CELL PHONE */
+
+.ai-object-card.cell-phone {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e0f7fa,
+            #ffffff
+        );
+
+}
+
+
+/* 05 - BOOK */
+
+.ai-object-card.book {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 06 - BENCH */
+
+.ai-object-card.bench {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f1f8e9,
+            #ffffff
+        );
+
+}
+
+
+/* 07 - MOUSE */
+
+.ai-object-card.mouse {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f3e5f5,
+            #ffffff
+        );
+
+}
+
+
+/* 08 - BOTTLE */
+
+.ai-object-card.bottle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e0f2f1,
+            #ffffff
+        );
+
+}
+
+
+/* 09 - BACKPACK */
+
+.ai-object-card.backpack {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 10 - APPLE */
+
+.ai-object-card.apple {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffebee,
+            #ffffff
+        );
+
+}
+
+
+/* 11 - BANANA */
+
+.ai-object-card.banana {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fffde7,
+            #ffffff
+        );
+
+}
+
+
+/* 12 - ORANGE */
+
+.ai-object-card.orange {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 13 - DOG */
+
+.ai-object-card.dog {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 14 - CAT */
+
+.ai-object-card.cat {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f3e5f5,
+            #ffffff
+        );
+
+}
+
+
+/* 15 - HORSE */
+
+.ai-object-card.horse {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #efebe9,
+            #ffffff
+        );
+
+}
+
+
+/* 16 - BUS */
+
+.ai-object-card.bus {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 17 - CAR */
+
+.ai-object-card.car {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fce4ec,
+            #ffffff
+        );
+
+}
+
+
+/* 18 - BICYCLE */
+
+.ai-object-card.bicycle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e8f5e9,
+            #ffffff
+        );
+
+}
+
+
+/* 19 - MOTORCYCLE */
+
+.ai-object-card.motorcycle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 20 - CHAIR */
+
+.ai-object-card.chair {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ede7f6,
+            #ffffff
+        );
+
+}
+
+
+/* =====================================================
+   FLOATING AI ICON ANIMATION
+===================================================== */
+
+@keyframes aiFloat {
+
+    0% {
+
+        transform:
+            translateY(0px);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+
+    100% {
+
+        transform:
+            translateY(0px);
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .ai-objects-section {
+
+        padding:
+
+            25px
+            18px;
+
+    }
+
+
+    .ai-objects-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .ai-objects-header h2 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .ai-header-icon {
+
+        width:
+            60px;
+
+        height:
+            60px;
+
+        min-width:
+            60px;
+
+        font-size:
+            30px;
+
+    }
+
+
+    .ai-object-grid {
+
+        grid-template-columns:
+
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:
+            15px;
+
+    }
+
+
+    .ai-object-card {
+
+        min-height:
+            215px;
+
+        padding:
+
+            20px
+            12px;
+
+    }
+
+
+    .ai-object-illustration {
+
+        width:
+            85px;
+
+        height:
+            85px;
+
+        font-size:
+            45px;
+
+    }
 
 }
 
@@ -1540,14 +2390,6 @@ strong {
     }
 
 
-    #objectDashboard {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
     .card ol li {
 
         padding-left:
@@ -1560,6 +2402,191 @@ strong {
 
 /* =========================================================
    SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+
+    .ai-objects-section {
+
+        margin:
+
+            25px
+            0;
+
+        padding:
+
+            20px
+            12px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .ai-objects-header {
+
+        gap:
+            12px;
+
+        margin-bottom:
+            22px;
+
+    }
+
+
+    .ai-header-icon {
+
+        width:
+            52px;
+
+        height:
+            52px;
+
+        min-width:
+            52px;
+
+        border-radius:
+            16px;
+
+        font-size:
+            25px;
+
+    }
+
+
+    .ai-small-title {
+
+        font-size:
+            9px;
+
+        letter-spacing:
+            1.2px;
+
+    }
+
+
+    .ai-objects-header h2 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .ai-objects-header p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .ai-object-grid {
+
+        grid-template-columns:
+
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:
+            12px;
+
+    }
+
+
+    .ai-object-card {
+
+        min-height:
+            200px;
+
+        padding:
+
+            18px
+            8px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .object-number {
+
+        width:
+            32px;
+
+        height:
+            32px;
+
+        top:
+            10px;
+
+        left:
+            10px;
+
+        font-size:
+            10px;
+
+        border-radius:
+            10px;
+
+    }
+
+
+    .ai-object-illustration {
+
+        width:
+            70px;
+
+        height:
+            70px;
+
+        margin-top:
+            15px;
+
+        font-size:
+            37px;
+
+    }
+
+
+    .ai-object-card h3 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .ai-object-card p {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .ai-object-card span {
+
+        padding:
+
+            5px
+            9px;
+
+        font-size:
+            9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 400px) {
@@ -1612,801 +2639,20 @@ strong {
 
     }
 
-}
-
-
-/* =========================================================
-   SUBTLE PAGE ANIMATION
-========================================================= */
-
-.card {
-
-    animation:
-
-        cardAppear
-        0.5s ease
-        both;
-
-}
-
-
-@keyframes cardAppear {
-
-    from {
-
-        opacity:
-            0;
-
-        transform:
-            translateY(15px);
-
-    }
-
-
-    to {
-
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-
-    }
-
-}
-/* =====================================================
-   AI DETECTABLE OBJECTS SECTION
-   Modern AI Cards - UI Only
-===================================================== */
-
-.ai-objects-section {
-    margin: 35px 0;
-    padding: 35px;
-    border-radius: 24px;
-    background:
-        radial-gradient(circle at top left, rgba(255, 183, 77, 0.18), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(186, 104, 200, 0.16), transparent 30%),
-        linear-gradient(135deg, #fff8f0, #f8f4ff, #f2fff9);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-}
-
-
-/* =====================================================
-   SECTION HEADER
-===================================================== */
-
-.ai-objects-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.ai-header-icon {
-    width: 75px;
-    height: 75px;
-    min-width: 75px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 38px;
-
-    border-radius: 22px;
-
-    background: linear-gradient(
-        135deg,
-        #ffb74d,
-        #ff8a65,
-        #ba68c8
-    );
-
-    box-shadow:
-        0 10px 25px rgba(186, 104, 200, 0.25);
-
-    animation: aiFloat 3s ease-in-out infinite;
-}
-
-.ai-small-title {
-    display: inline-block;
-
-    margin-bottom: 6px;
-
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-
-    color: #8e44ad;
-}
-
-.ai-objects-header h2 {
-    margin: 0;
-
-    font-size: 30px;
-    font-weight: 800;
-
-    color: #2d1b36;
-}
-
-.ai-objects-header p {
-    margin: 8px 0 0;
-
-    max-width: 650px;
-
-    line-height: 1.6;
-
-    color: #666;
-}
-
-
-/* =====================================================
-   OBJECT GRID
-===================================================== */
-
-.ai-object-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(210px, 1fr));
-
-    gap: 20px;
-}
-
-
-/* =====================================================
-   OBJECT CARD
-===================================================== */
-
-.ai-object-card {
-    position: relative;
-
-    overflow: hidden;
-
-    min-height: 230px;
-
-    padding: 25px 20px;
-
-    border-radius: 22px;
-
-    background: rgba(255, 255, 255, 0.92);
-
-    border: 1px solid rgba(0, 0, 0, 0.06);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08);
-
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
-
-    text-align: center;
-}
-
-
-/* Decorative AI Background */
-
-.ai-object-card::before {
-    content: "";
-
-    position: absolute;
-
-    width: 120px;
-    height: 120px;
-
-    border-radius: 50%;
-
-    top: -55px;
-    right: -45px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 183, 77, 0.25),
-            rgba(186, 104, 200, 0.15)
-        );
-
-    transition: 0.4s ease;
-}
-
-.ai-object-card::after {
-    content: "AI";
-
-    position: absolute;
-
-    bottom: 12px;
-    right: 15px;
-
-    font-size: 40px;
-    font-weight: 900;
-
-    color: rgba(0, 0, 0, 0.035);
-
-    letter-spacing: 3px;
-}
-
-
-/* =====================================================
-   HOVER EFFECT
-===================================================== */
-
-.ai-object-card:hover {
-    transform: translateY(-8px) scale(1.02);
-
-    box-shadow:
-        0 20px 35px rgba(0, 0, 0, 0.14);
-}
-
-.ai-object-card:hover::before {
-    transform: scale(1.5);
-}
-
-
-/* =====================================================
-   OBJECT NUMBER
-===================================================== */
-
-.object-number {
-    position: absolute;
-
-    top: 15px;
-    left: 15px;
-
-    width: 38px;
-    height: 38px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ff8a65,
-            #ba68c8
-        );
-
-    box-shadow:
-        0 6px 15px rgba(0, 0, 0, 0.12);
-}
-
-
-/* =====================================================
-   AI OBJECT ILLUSTRATION
-===================================================== */
-
-.ai-object-illustration {
-    position: relative;
-
-    z-index: 2;
-
-    width: 100px;
-    height: 100px;
-
-    margin: 10px auto 15px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    font-size: 55px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fff3e0,
-            #f3e5f5,
-            #e8f5e9
-        );
-
-    box-shadow:
-        inset 0 0 15px rgba(255, 255, 255, 0.8),
-        0 8px 20px rgba(0, 0, 0, 0.08);
-
-    transition:
-        transform 0.4s ease;
-}
-
-.ai-object-card:hover .ai-object-illustration {
-    transform:
-        rotate(-5deg)
-        scale(1.12);
-}
-
-
-/* =====================================================
-   OBJECT NAME
-===================================================== */
-
-.ai-object-card h3 {
-    position: relative;
-
-    z-index: 2;
-
-    margin: 8px 0 6px;
-
-    font-size: 20px;
-
-    font-weight: 800;
-
-    color: #2d2d2d;
-}
-
-
-/* =====================================================
-   OBJECT DESCRIPTION
-===================================================== */
-
-.ai-object-card p {
-    position: relative;
-
-    z-index: 2;
-
-    margin: 0 0 12px;
-
-    font-size: 13px;
-
-    color: #777;
-}
-
-
-/* =====================================================
-   AI VISION BADGE
-===================================================== */
-
-.ai-object-card span {
-    position: relative;
-
-    z-index: 2;
-
-    display: inline-block;
-
-    padding: 6px 13px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.8px;
-
-    color: #7b1fa2;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f3e5f5,
-            #fff3e0
-        );
-
-    border:
-        1px solid rgba(123, 31, 162, 0.12);
-}
-
-
-/* =====================================================
-   DIFFERENT COLOR THEMES FOR EACH OBJECT
-===================================================== */
-
-
-/* 1 PERSON */
-
-.ai-object-card.person {
-    background:
-        linear-gradient(
-            145deg,
-            #fff3e0,
-            #ffffff
-        );
-}
-
-
-/* 2 BICYCLE */
-
-.ai-object-card.bicycle {
-    background:
-        linear-gradient(
-            145deg,
-            #e8f5e9,
-            #ffffff
-        );
-}
-
-
-/* 3 CAR */
-
-.ai-object-card.car {
-    background:
-        linear-gradient(
-            145deg,
-            #fce4ec,
-            #ffffff
-        );
-}
-
-
-/* 4 MOTORCYCLE */
-
-.ai-object-card.motorcycle {
-    background:
-        linear-gradient(
-            145deg,
-            #fff8e1,
-            #ffffff
-        );
-}
-
-
-/* 5 AIRPLANE */
-
-.ai-object-card.airplane {
-    background:
-        linear-gradient(
-            145deg,
-            #e3f2fd,
-            #ffffff
-        );
-}
-
-
-/* 6 BUS */
-
-.ai-object-card.bus {
-    background:
-        linear-gradient(
-            145deg,
-            #fff3e0,
-            #ffffff
-        );
-}
-
-
-/* 7 TRAIN */
-
-.ai-object-card.train {
-    background:
-        linear-gradient(
-            145deg,
-            #ede7f6,
-            #ffffff
-        );
-}
-
-
-/* 8 TRUCK */
-
-.ai-object-card.truck {
-    background:
-        linear-gradient(
-            145deg,
-            #f1f8e9,
-            #ffffff
-        );
-}
-
-
-/* 9 BOAT */
-
-.ai-object-card.boat {
-    background:
-        linear-gradient(
-            145deg,
-            #e0f7fa,
-            #ffffff
-        );
-}
-
-
-/* 10 TRAFFIC LIGHT */
-
-.ai-object-card.traffic-light {
-    background:
-        linear-gradient(
-            145deg,
-            #fce4ec,
-            #ffffff
-        );
-}
-
-
-/* 11 FIRE HYDRANT */
-
-.ai-object-card.hydrant {
-    background:
-        linear-gradient(
-            145deg,
-            #ffebee,
-            #ffffff
-        );
-}
-
-
-/* 12 STOP SIGN */
-
-.ai-object-card.stop-sign {
-    background:
-        linear-gradient(
-            145deg,
-            #fff3e0,
-            #ffffff
-        );
-}
-
-
-/* 13 PARKING METER */
-
-.ai-object-card.parking-meter {
-    background:
-        linear-gradient(
-            145deg,
-            #e8eaf6,
-            #ffffff
-        );
-}
-
-
-/* 14 BENCH */
-
-.ai-object-card.bench {
-    background:
-        linear-gradient(
-            145deg,
-            #f9fbe7,
-            #ffffff
-        );
-}
-
-
-/* 15 BIRD */
-
-.ai-object-card.bird {
-    background:
-        linear-gradient(
-            145deg,
-            #e3f2fd,
-            #ffffff
-        );
-}
-
-
-/* 16 CAT */
-
-.ai-object-card.cat {
-    background:
-        linear-gradient(
-            145deg,
-            #f3e5f5,
-            #ffffff
-        );
-}
-
-
-/* 17 DOG */
-
-.ai-object-card.dog {
-    background:
-        linear-gradient(
-            145deg,
-            #fff8e1,
-            #ffffff
-        );
-}
-
-
-/* 18 HORSE */
-
-.ai-object-card.horse {
-    background:
-        linear-gradient(
-            145deg,
-            #efebe9,
-            #ffffff
-        );
-}
-
-
-/* 19 SHEEP */
-
-.ai-object-card.sheep {
-    background:
-        linear-gradient(
-            145deg,
-            #fafafa,
-            #f3e5f5
-        );
-}
-
-
-/* 20 COW */
-
-.ai-object-card.cow {
-    background:
-        linear-gradient(
-            145deg,
-            #e8f5e9,
-            #fff3e0
-        );
-}
-
-
-/* =====================================================
-   FLOATING AI ICON ANIMATION
-===================================================== */
-
-@keyframes aiFloat {
-
-    0% {
-        transform: translateY(0px);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-
-    100% {
-        transform: translateY(0px);
-    }
-
-}
-
-
-/* =====================================================
-   RESPONSIVE DESIGN - TABLET
-===================================================== */
-
-@media (max-width: 768px) {
-
-    .ai-objects-section {
-        padding: 25px 18px;
-    }
-
-    .ai-objects-header {
-        align-items: flex-start;
-    }
-
-    .ai-objects-header h2 {
-        font-size: 24px;
-    }
-
-    .ai-header-icon {
-        width: 60px;
-        height: 60px;
-
-        min-width: 60px;
-
-        font-size: 30px;
-    }
 
     .ai-object-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
 
-        gap: 15px;
+        gap:
+            9px;
+
     }
+
 
     .ai-object-card {
-        min-height: 215px;
 
-        padding: 20px 12px;
-    }
+        min-height:
+            190px;
 
-    .ai-object-illustration {
-        width: 85px;
-        height: 85px;
-
-        font-size: 45px;
-    }
-
-}
-
-
-/* =====================================================
-   RESPONSIVE DESIGN - MOBILE
-===================================================== */
-
-@media (max-width: 480px) {
-
-    .ai-objects-section {
-        margin: 25px 0;
-
-        padding: 20px 12px;
-
-        border-radius: 18px;
-    }
-
-    .ai-objects-header {
-        gap: 12px;
-
-        margin-bottom: 22px;
-    }
-
-    .ai-header-icon {
-        width: 52px;
-        height: 52px;
-
-        min-width: 52px;
-
-        border-radius: 16px;
-
-        font-size: 25px;
-    }
-
-    .ai-small-title {
-        font-size: 9px;
-
-        letter-spacing: 1.2px;
-    }
-
-    .ai-objects-header h2 {
-        font-size: 20px;
-    }
-
-    .ai-objects-header p {
-        font-size: 13px;
-    }
-
-    .ai-object-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 12px;
-    }
-
-    .ai-object-card {
-        min-height: 200px;
-
-        padding: 18px 8px;
-
-        border-radius: 18px;
-    }
-
-    .object-number {
-        width: 32px;
-        height: 32px;
-
-        top: 10px;
-        left: 10px;
-
-        font-size: 10px;
-
-        border-radius: 10px;
-    }
-
-    .ai-object-illustration {
-        width: 70px;
-        height: 70px;
-
-        margin-top: 15px;
-
-        font-size: 37px;
-    }
-
-    .ai-object-card h3 {
-        font-size: 16px;
-    }
-
-    .ai-object-card p {
-        font-size: 11px;
-    }
-
-    .ai-object-card span {
-        padding: 5px 9px;
-
-        font-size: 9px;
     }
 
 }
