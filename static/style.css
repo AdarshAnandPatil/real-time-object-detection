@@ -1,232 +1,1656 @@
+/* =========================================================
+   REAL-TIME OBJECT DETECTION
+   MODERN AI UI DESIGN
+   UI ONLY - FUNCTIONALITY NOT CHANGED
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #1d2939;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #2d2440;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(255, 214, 102, 0.30),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at top right,
+            rgba(255, 143, 171, 0.25),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at bottom left,
+            rgba(120, 224, 196, 0.22),
+            transparent 35%
+        ),
+
+        #f8f6fc;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header {
-    background: #243b53;
-    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        48px
+        20px
+        44px;
+
     text-align: center;
-    padding: 24px 12px;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #6c3fa4 0%,
+
+            #9c4d9e 35%,
+
+            #d65d8c 65%,
+
+            #e58c5c 100%
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(80, 40, 100, 0.25);
+
 }
+
+
+/* Decorative circles */
+
+header::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    top: -100px;
+
+    left: -60px;
+
+}
+
+
+header::after {
+
+    content: "🤖";
+
+    position: absolute;
+
+    right: 8%;
+
+    bottom: -25px;
+
+    font-size: 130px;
+
+    opacity: 0.15;
+
+    transform: rotate(-10deg);
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
 
 header h1 {
-    margin: 0 0 7px;
-    font-size: 28px;
+
+    position: relative;
+
+    z-index: 1;
+
+    margin: 0 0 12px;
+
+    font-size:
+        clamp(
+            30px,
+            5vw,
+            48px
+        );
+
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+
+    text-shadow:
+
+        0 3px 12px
+        rgba(0,0,0,0.18);
+
 }
+
+
+header h1::before {
+
+    content: "👁️";
+
+    margin-right: 12px;
+
+}
+
 
 header p {
+
+    position: relative;
+
+    z-index: 1;
+
     margin: 0;
+
+    font-size:
+        clamp(
+            15px,
+            2vw,
+            19px
+        );
+
+    opacity: 0.95;
+
+    letter-spacing: 1px;
+
 }
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
 
 main {
-    max-width: 950px;
-    margin: 24px auto;
-    padding: 0 15px;
+
+    width: min(
+        1100px,
+        calc(100% - 30px)
+    );
+
+    margin:
+
+        32px
+        auto
+        60px;
+
 }
+
+
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 18px #00000014;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    border:
+
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.9
+        );
+
+    border-radius: 24px;
+
+    padding: 28px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(73, 51, 92, 0.10),
+
+        0 2px 8px
+        rgba(73, 51, 92, 0.05);
+
+    transition:
+
+        transform 0.3s ease,
+
+        box-shadow 0.3s ease;
+
 }
+
+
+/* Card hover */
+
+.card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(73, 51, 92, 0.15);
+
+}
+
+
+/* =========================================================
+   CARD TITLES
+========================================================= */
 
 .card h2 {
-    margin-top: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin:
+
+        0
+        0
+        20px;
+
+    font-size:
+
+        clamp(
+            22px,
+            3vw,
+            29px
+        );
+
+    color:
+        #56356d;
+
+    font-weight:
+        750;
+
 }
 
 
-/* =========================
-   CAMERA
-========================= */
+/* Gradient underline */
+
+.card h2::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+
+            #f7b267,
+
+            #e76f8f,
+
+            #9b5de5,
+
+            transparent
+        );
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+========================================================= */
+
+.card p {
+
+    line-height: 1.7;
+
+    color:
+        #5e5669;
+
+    font-size:
+        16px;
+
+}
+
+
+/* =========================================================
+   CAMERA SECTION
+========================================================= */
 
 .camera {
+
     position: relative;
-    background: #111;
-    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 330px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #2a1f3d,
+
+            #3d2854,
+
+            #56356d
+        );
+
+    border-radius: 20px;
+
     overflow: hidden;
-    min-height: 300px;
-    text-align: center;
+
+    border:
+
+        5px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    box-shadow:
+
+        inset
+        0
+        0
+        50px
+        rgba(0,0,0,0.35),
+
+        0 12px 25px
+        rgba(70, 40, 90, 0.20);
+
 }
+
+
+/* AI scanning decoration */
+
+.camera::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 150%;
+
+    height: 2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #ffd166,
+
+            #ffffff,
+
+            #ff8fab,
+
+            transparent
+
+        );
+
+    top: 15%;
+
+    left: -25%;
+
+    opacity: 0.55;
+
+    animation:
+
+        scanLine
+        3s
+        linear
+        infinite;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+}
+
+
+@keyframes scanLine {
+
+    0% {
+
+        top: 10%;
+
+        opacity: 0;
+
+    }
+
+
+    20% {
+
+        opacity: 0.7;
+
+    }
+
+
+    80% {
+
+        opacity: 0.7;
+
+    }
+
+
+    100% {
+
+        top: 90%;
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* Video */
 
 video {
+
+    position: relative;
+
+    z-index: 1;
+
     width: 100%;
-    max-height: 500px;
+
+    max-height: 550px;
+
     display: block;
+
     object-fit: contain;
+
+    background:
+        #151019;
+
 }
+
+
+/* Camera message */
 
 .camera span {
+
     position: absolute;
+
+    z-index: 3;
+
     inset: 0;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
+    padding: 20px;
+
+    text-align: center;
+
     color: white;
-    font-size: 18px;
+
+    font-size:
+        20px;
+
+    font-weight:
+        600;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(100,70,120,0.20),
+
+            rgba(15,10,20,0.70)
+
+        );
+
 }
 
 
-/* =========================
-   BUTTONS
-========================= */
+/* =========================================================
+   BUTTON CONTAINER
+========================================================= */
 
 .buttons {
+
     display: flex;
+
     flex-wrap: wrap;
-    gap: 10px;
+
     justify-content: center;
-    margin-top: 16px;
+
+    gap: 14px;
+
+    margin-top: 22px;
+
 }
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 button,
 label {
-    background: #2878b5;
-    color: white;
-    border: 0;
-    border-radius: 9px;
-    padding: 13px 18px;
-    font-size: 16px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 48px;
+
+    padding:
+
+        12px
+        22px;
+
+    border: none;
+
+    border-radius: 14px;
+
     cursor: pointer;
-    text-align: center;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 650;
+
+    font-family: inherit;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #8e5cc5,
+
+            #c45fa2
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(142, 92, 197, 0.25);
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease,
+
+        filter 0.25s ease;
+
 }
+
+
+/* Button shine */
+
+button::before,
+label::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 50px;
+
+    height: 150%;
+
+    top: -25%;
+
+    left: -80px;
+
+    transform:
+        rotate(25deg);
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+    transition:
+        left 0.5s ease;
+
+}
+
+
+button:hover::before,
+label:hover::before {
+
+    left:
+        120%;
+
+}
+
 
 button:hover,
 label:hover {
-    opacity: 0.9;
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+
+        0 12px 24px
+        rgba(142, 92, 197, 0.32);
+
+    filter:
+        brightness(1.05);
+
 }
+
+
+button:active,
+label:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* Disabled button */
 
 button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+
+    opacity:
+        0.45;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
+
+    box-shadow:
+        none;
+
 }
+
+
+/* Hide file input */
 
 label input {
+
     display: none;
+
 }
 
 
-/* =========================
+/* Different button colours */
+
+#capture {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #f4a261,
+
+            #e76f51
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(231,111,81,0.25);
+
+}
+
+
+#stop {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #d95d75,
+
+            #a63d5a
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(180,60,90,0.22);
+
+}
+
+
+/* Upload label */
+
+label {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #4f9b8f,
+
+            #6dbb8b
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(70,150,130,0.25);
+
+}
+
+
+/* =========================================================
    STATUS
-========================= */
+========================================================= */
 
 #status {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin:
+
+        20px
+        0
+        0;
+
+    padding:
+        14px;
+
     text-align: center;
-    font-weight: bold;
-    margin-top: 15px;
+
+    border-radius: 14px;
+
+    font-weight: 650;
+
+    color:
+        #6c4c72;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff4d6,
+
+            #ffe4d6
+
+        );
+
+    border:
+
+        1px solid
+        rgba(230,160,100,0.25);
+
 }
 
 
-/* =========================
+#status::before {
+
+    content:
+        "🤖";
+
+}
+
+
+/* =========================================================
    CANVAS
-========================= */
+========================================================= */
 
 #canvas {
+
     display: none;
+
 }
 
 
-/* =========================
+/* =========================================================
    RESULT IMAGE
-========================= */
+========================================================= */
 
 #result {
+
     display: none;
+
     width: 100%;
-    max-width: 850px;
-    margin: 15px auto;
-    border-radius: 12px;
+
+    max-width: 900px;
+
+    margin:
+
+        20px
+        auto;
+
+    border-radius:
+        18px;
+
+    border:
+
+        4px solid
+        #ffffff;
+
+    box-shadow:
+
+        0 12px 30px
+        rgba(80,50,90,0.20);
+
 }
 
 
-/* =========================
-   DETECTION ITEMS
-========================= */
+/* =========================================================
+   DETECTION COUNT
+========================================================= */
+
+#count {
+
+    padding:
+        15px;
+
+    border-radius:
+        14px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #f3e8ff,
+
+            #ffe6f0
+
+        );
+
+    color:
+        #6d3e70;
+
+    font-weight:
+        650;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================================
+   DETECTED ITEMS
+========================================================= */
 
 #items {
+
     display: grid;
+
     grid-template-columns:
-        repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
+
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
+
+    gap:
+        14px;
+
+    margin-top:
+        18px;
+
 }
+
+
+/* =========================================================
+   GENERAL ITEM CARD
+========================================================= */
 
 .item {
-    background: #eef5fb;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 15px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        16px;
+
+    border-radius:
+        16px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff8e7,
+
+            #fff0f5
+
+        );
+
+    border:
+
+        1px solid
+        rgba(220,150,180,0.18);
+
+    color:
+        #54435b;
+
+    box-shadow:
+
+        0 5px 14px
+        rgba(100,70,100,0.07);
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease;
+
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+.item:hover {
+
+    transform:
+
+        translateY(-4px);
+
+    box-shadow:
+
+        0 12px 20px
+        rgba(100,70,100,0.12);
+
+}
+
+
+/* =========================================================
+   OBJECT DASHBOARD
+========================================================= */
 
 #objectDashboard {
+
     display: grid;
+
     grid-template-columns:
-        repeat(auto-fit, minmax(210px, 1fr));
-    gap: 10px;
+
+        repeat(
+            auto-fit,
+            minmax(200px, 1fr)
+        );
+
+    gap:
+        14px;
+
+    margin-top:
+        18px;
+
 }
+
 
 #objectDashboard .item {
-    background: #eef5fb;
-    border-radius: 10px;
-    padding: 14px;
-    border-left: 4px solid #2878b5;
+
+    min-height:
+        72px;
+
+    display:
+
+        flex;
+
+    align-items:
+
+        center;
+
+    gap:
+        10px;
+
+    font-size:
+        16px;
+
+    font-weight:
+        600;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #ffffff,
+
+            #f9f3ff
+
+        );
+
+    border:
+
+        1px solid
+        rgba(150,100,190,0.12);
+
+    border-left:
+
+        5px solid
+        #9b5de5;
+
 }
+
+
+/* Alternating colours */
+
+#objectDashboard .item:nth-child(3n+1) {
+
+    border-left-color:
+        #f4a261;
+
+}
+
+
+#objectDashboard .item:nth-child(3n+2) {
+
+    border-left-color:
+        #5aa897;
+
+}
+
+
+#objectDashboard .item:nth-child(3n) {
+
+    border-left-color:
+        #d65d8c;
+
+}
+
+
+#objectDashboard .item b {
+
+    display:
+
+        inline-flex;
+
+    align-items:
+
+        center;
+
+    justify-content:
+
+        center;
+
+    min-width:
+        32px;
+
+    height:
+        32px;
+
+    border-radius:
+        50%;
+
+    color:
+        white;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #9b5de5,
+
+            #d65d8c
+
+        );
+
+    font-size:
+        13px;
+
+}
+
+
+/* Dashboard item details */
 
 #objectDashboard .item strong {
-    display: block;
-    margin-top: 6px;
-    font-size: 14px;
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    font-size:
+        14px;
+
 }
+
 
 #objectDashboard .item span {
-    display: block;
-    margin-top: 6px;
-    color: #667085;
-    font-size: 13px;
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    color:
+        #7a6d80;
+
+    font-size:
+        13px;
+
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
 
-@media (max-width: 600px) {
+.card ol {
+
+    list-style:
+        none;
+
+    padding:
+        0;
+
+    margin:
+        20px
+        0;
+
+    counter-reset:
+        steps;
+
+}
+
+
+.card ol li {
+
+    position:
+        relative;
+
+    counter-increment:
+        steps;
+
+    margin-bottom:
+        13px;
+
+    padding:
+
+        16px
+        18px
+        16px
+        62px;
+
+    border-radius:
+        16px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #f7f0ff,
+
+            #fff5f8
+
+        );
+
+    color:
+        #55485c;
+
+    box-shadow:
+
+        0 4px 10px
+        rgba(100,70,100,0.06);
+
+    transition:
+
+        transform
+        0.25s ease;
+
+}
+
+
+.card ol li:hover {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+.card ol li::before {
+
+    content:
+        counter(steps);
+
+    position:
+        absolute;
+
+    left:
+        15px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    color:
+        white;
+
+    font-weight:
+        700;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #9b5de5,
+
+            #e76f8f
+
+        );
+
+}
+
+
+/* =========================================================
+   BOLD TEXT
+========================================================= */
+
+b,
+strong {
+
+    color:
+        #633d72;
+
+}
+
+
+/* =========================================================
+   SPECIAL MODEL INFORMATION
+========================================================= */
+
+.card p b {
+
+    display:
+        inline-block;
+
+    margin-right:
+        5px;
+
+    color:
+        #8c4d83;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+
+    width:
+        10px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+    background:
+        #f4eef8;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    border-radius:
+        20px;
+
+    background:
+
+        linear-gradient(
+
+            #9b5de5,
+
+            #d65d8c
+
+        );
+
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+    header {
+
+        padding:
+
+            38px
+            15px
+            35px;
+
+    }
+
+
+    header::after {
+
+        font-size:
+            80px;
+
+        right:
+            2%;
+
+    }
+
 
     main {
-        margin: 15px auto;
-        padding: 0 10px;
+
+        width:
+            calc(100% - 20px);
+
+        margin:
+
+            18px
+            auto
+            40px;
+
     }
+
 
     .card {
-        padding: 16px;
+
+        padding:
+            18px;
+
+        border-radius:
+            20px;
+
+        margin-bottom:
+            18px;
+
     }
 
-    header h1 {
-        font-size: 23px;
+
+    .card h2 {
+
+        font-size:
+            22px;
+
     }
+
+
+    .camera {
+
+        min-height:
+            240px;
+
+        border-radius:
+            16px;
+
+    }
+
+
+    .buttons {
+
+        flex-direction:
+            column;
+
+    }
+
 
     button,
     label {
-        width: 100%;
+
+        width:
+            100%;
+
+        min-height:
+            50px;
+
     }
 
-    .camera {
-        min-height: 240px;
+
+    #items {
+
+        grid-template-columns:
+            1fr;
+
     }
+
 
     #objectDashboard {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
+
     }
+
+
+    .card ol li {
+
+        padding-left:
+            58px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+
+    header h1 {
+
+        font-size:
+            27px;
+
+    }
+
+
+    header p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .card {
+
+        padding:
+            15px;
+
+    }
+
+
+    .card h2 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .camera {
+
+        min-height:
+            210px;
+
+    }
+
+
+    .camera span {
+
+        font-size:
+            16px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SUBTLE PAGE ANIMATION
+========================================================= */
+
+.card {
+
+    animation:
+
+        cardAppear
+        0.5s ease
+        both;
+
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
 }
