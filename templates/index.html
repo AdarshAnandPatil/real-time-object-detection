@@ -1,32 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Real-Time Object Detection</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link
+        rel="stylesheet"
+        href="/static/style.css">
+
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
-    <h1>Real-Time Object Detection</h1>
-    <p>Camera → Capture → AI → Object Detection</p>
+
+    <h1>
+        Real-Time Object Detection
+    </h1>
+
+    <p>
+        Camera → Capture → AI → Object Detection
+    </p>
+
 </header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
-    <!-- =========================
+
+    <!-- =====================================================
          CAMERA SECTION
-    ========================== -->
+    ===================================================== -->
 
     <section class="card">
 
-        <h2>📷 Camera Detection</h2>
+        <h2>
+            📷 Camera Detection
+        </h2>
+
 
         <div class="camera">
+
 
             <video
                 id="camera"
@@ -35,755 +67,1255 @@
                 muted>
             </video>
 
+
             <span id="msg">
+
                 Camera is off
+
             </span>
 
+
         </div>
+
+
+
+        <!-- CAMERA BUTTONS -->
 
         <div class="buttons">
 
+
             <button id="start">
+
                 📷 Start Camera
+
             </button>
 
-            <button id="capture" disabled>
+
+            <button
+                id="capture"
+                disabled>
+
                 📸 Capture Photo
+
             </button>
 
-            <button id="stop" disabled>
+
+            <button
+                id="stop"
+                disabled>
+
                 ⏹ Stop Camera
+
             </button>
+
 
         </div>
 
-        <canvas id="canvas"></canvas>
+
+
+        <!-- CANVAS -->
+
+        <canvas
+            id="canvas">
+        </canvas>
+
+
+
+        <!-- STATUS -->
 
         <p id="status">
+
             Press Start Camera to begin.
+
         </p>
+
 
     </section>
 
 
-    <!-- =========================
-         UPLOAD SECTION
-    ========================== -->
+
+    <!-- =====================================================
+         UPLOAD IMAGE SECTION
+    ===================================================== -->
 
     <section class="card">
 
-        <h2>🖼️ Upload Image</h2>
+
+        <h2>
+            🖼️ Upload Image
+        </h2>
+
+
 
         <div class="buttons">
 
+
             <label>
+
                 📁 Choose Image
+
 
                 <input
                     id="upload"
                     type="file"
                     accept="image/*">
+
+
             </label>
+
 
         </div>
 
+
+
         <p>
+
             Upload an image to detect supported objects.
+
         </p>
+
 
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          DETECTION RESULT
-    ========================== -->
+    ===================================================== -->
 
     <section class="card">
 
-        <h2>🔍 Detection Result</h2>
+
+        <h2>
+            🔍 Detection Result
+        </h2>
+
+
 
         <img
             id="result"
             alt="Detection result">
 
+
+
         <p id="count">
+
             No detections yet.
+
         </p>
 
-        <div id="items"></div>
+
+
+        <div id="items">
+
+        </div>
+
 
     </section>
 
 
-        <!-- 2 BICYCLE -->
 
-        <div class="ai-object-card bicycle">
+    <!-- =====================================================
+         AI DETECTABLE OBJECTS SECTION
+         UI ONLY
+         DOES NOT CHANGE OBJECT DETECTION
+    ===================================================== -->
 
-            <div class="object-number">
-                02
+    <section class="ai-objects-section">
+
+
+        <!-- =====================================================
+             AI SECTION HEADER
+        ===================================================== -->
+
+        <div class="ai-objects-header">
+
+
+            <div class="ai-header-icon">
+
+                🤖
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚲
+
+
+            <div>
+
+
+                <span class="ai-small-title">
+
+                    ARTIFICIAL INTELLIGENCE
+
+                </span>
+
+
+
+                <h2>
+
+                    Objects Our AI Can Detect
+
+                </h2>
+
+
+
+                <p>
+
+                    Our intelligent computer vision system can
+                    identify 20 selected everyday objects
+                    in real time.
+
+                </p>
+
+
             </div>
 
-            <h3>Bicycle</h3>
-
-            <p>
-                Vehicle Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
 
         </div>
 
 
-        <!-- 3 CAR -->
 
-        <div class="ai-object-card car">
+        <!-- =====================================================
+             OBJECT GRID
+        ===================================================== -->
 
-            <div class="object-number">
-                03
+        <div class="ai-object-grid">
+
+
+
+            <!-- =============================================
+                 01 PERSON
+            ============================================== -->
+
+            <div class="ai-object-card person">
+
+
+                <div class="object-number">
+
+                    01
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    👤
+
+                </div>
+
+
+                <h3>
+
+                    Person
+
+                </h3>
+
+
+                <p>
+
+                    Human Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚗
+
+
+            <!-- =============================================
+                 02 BIRD
+            ============================================== -->
+
+            <div class="ai-object-card bird">
+
+
+                <div class="object-number">
+
+                    02
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🐦
+
+                </div>
+
+
+                <h3>
+
+                    Bird
+
+                </h3>
+
+
+                <p>
+
+                    Animal Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Car</h3>
-
-            <p>
-                Vehicle Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 4 MOTORCYCLE -->
+            <!-- =============================================
+                 03 LAPTOP
+            ============================================== -->
 
-        <div class="ai-object-card motorcycle">
+            <div class="ai-object-card laptop">
 
-            <div class="object-number">
-                04
+
+                <div class="object-number">
+
+                    03
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    💻
+
+                </div>
+
+
+                <h3>
+
+                    Laptop
+
+                </h3>
+
+
+                <p>
+
+                    Electronic Device
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🏍️
+
+
+            <!-- =============================================
+                 04 CELL PHONE
+            ============================================== -->
+
+            <div class="ai-object-card cell-phone">
+
+
+                <div class="object-number">
+
+                    04
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    📱
+
+                </div>
+
+
+                <h3>
+
+                    Cell Phone
+
+                </h3>
+
+
+                <p>
+
+                    Smart Device
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Motorcycle</h3>
-
-            <p>
-                Vehicle Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 5 AIRPLANE -->
+            <!-- =============================================
+                 05 BOOK
+            ============================================== -->
 
-        <div class="ai-object-card airplane">
+            <div class="ai-object-card book">
 
-            <div class="object-number">
-                05
+
+                <div class="object-number">
+
+                    05
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    📚
+
+                </div>
+
+
+                <h3>
+
+                    Book
+
+                </h3>
+
+
+                <p>
+
+                    Learning Object
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                ✈️
+
+
+            <!-- =============================================
+                 06 BENCH
+            ============================================== -->
+
+            <div class="ai-object-card bench">
+
+
+                <div class="object-number">
+
+                    06
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🪑
+
+                </div>
+
+
+                <h3>
+
+                    Bench
+
+                </h3>
+
+
+                <p>
+
+                    Public Object
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Airplane</h3>
-
-            <p>
-                Aircraft Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 6 BUS -->
+            <!-- =============================================
+                 07 MOUSE
+            ============================================== -->
 
-        <div class="ai-object-card bus">
+            <div class="ai-object-card mouse">
 
-            <div class="object-number">
-                06
+
+                <div class="object-number">
+
+                    07
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🖱️
+
+                </div>
+
+
+                <h3>
+
+                    Mouse
+
+                </h3>
+
+
+                <p>
+
+                    Computer Device
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚌
+
+
+            <!-- =============================================
+                 08 BOTTLE
+            ============================================== -->
+
+            <div class="ai-object-card bottle">
+
+
+                <div class="object-number">
+
+                    08
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🍾
+
+                </div>
+
+
+                <h3>
+
+                    Bottle
+
+                </h3>
+
+
+                <p>
+
+                    Everyday Object
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Bus</h3>
-
-            <p>
-                Vehicle Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 7 TRAIN -->
+            <!-- =============================================
+                 09 BACKPACK
+            ============================================== -->
 
-        <div class="ai-object-card train">
+            <div class="ai-object-card backpack">
 
-            <div class="object-number">
-                07
+
+                <div class="object-number">
+
+                    09
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🎒
+
+                </div>
+
+
+                <h3>
+
+                    Backpack
+
+                </h3>
+
+
+                <p>
+
+                    Personal Object
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚆
+
+
+            <!-- =============================================
+                 10 APPLE
+            ============================================== -->
+
+            <div class="ai-object-card apple">
+
+
+                <div class="object-number">
+
+                    10
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🍎
+
+                </div>
+
+
+                <h3>
+
+                    Apple
+
+                </h3>
+
+
+                <p>
+
+                    Food Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Train</h3>
-
-            <p>
-                Transport Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 8 TRUCK -->
+            <!-- =============================================
+                 11 BANANA
+            ============================================== -->
 
-        <div class="ai-object-card truck">
+            <div class="ai-object-card banana">
 
-            <div class="object-number">
-                08
+
+                <div class="object-number">
+
+                    11
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🍌
+
+                </div>
+
+
+                <h3>
+
+                    Banana
+
+                </h3>
+
+
+                <p>
+
+                    Food Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚛
+
+
+            <!-- =============================================
+                 12 ORANGE
+            ============================================== -->
+
+            <div class="ai-object-card orange">
+
+
+                <div class="object-number">
+
+                    12
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🍊
+
+                </div>
+
+
+                <h3>
+
+                    Orange
+
+                </h3>
+
+
+                <p>
+
+                    Food Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Truck</h3>
-
-            <p>
-                Vehicle Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 9 BOAT -->
+            <!-- =============================================
+                 13 DOG
+            ============================================== -->
 
-        <div class="ai-object-card boat">
+            <div class="ai-object-card dog">
 
-            <div class="object-number">
-                09
+
+                <div class="object-number">
+
+                    13
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🐕
+
+                </div>
+
+
+                <h3>
+
+                    Dog
+
+                </h3>
+
+
+                <p>
+
+                    Animal Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚤
+
+
+            <!-- =============================================
+                 14 CAT
+            ============================================== -->
+
+            <div class="ai-object-card cat">
+
+
+                <div class="object-number">
+
+                    14
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🐈
+
+                </div>
+
+
+                <h3>
+
+                    Cat
+
+                </h3>
+
+
+                <p>
+
+                    Animal Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Boat</h3>
-
-            <p>
-                Water Vehicle
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 10 TRAFFIC LIGHT -->
+            <!-- =============================================
+                 15 HORSE
+            ============================================== -->
 
-        <div class="ai-object-card traffic-light">
+            <div class="ai-object-card horse">
 
-            <div class="object-number">
-                10
+
+                <div class="object-number">
+
+                    15
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🐎
+
+                </div>
+
+
+                <h3>
+
+                    Horse
+
+                </h3>
+
+
+                <p>
+
+                    Animal Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚦
+
+
+            <!-- =============================================
+                 16 BUS
+            ============================================== -->
+
+            <div class="ai-object-card bus">
+
+
+                <div class="object-number">
+
+                    16
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🚌
+
+                </div>
+
+
+                <h3>
+
+                    Bus
+
+                </h3>
+
+
+                <p>
+
+                    Vehicle Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Traffic Light</h3>
-
-            <p>
-                Road Object
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 11 FIRE HYDRANT -->
+            <!-- =============================================
+                 17 CAR
+            ============================================== -->
 
-        <div class="ai-object-card hydrant">
+            <div class="ai-object-card car">
 
-            <div class="object-number">
-                11
+
+                <div class="object-number">
+
+                    17
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🚗
+
+                </div>
+
+
+                <h3>
+
+                    Car
+
+                </h3>
+
+
+                <p>
+
+                    Vehicle Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🚒
+
+
+            <!-- =============================================
+                 18 BICYCLE
+            ============================================== -->
+
+            <div class="ai-object-card bicycle">
+
+
+                <div class="object-number">
+
+                    18
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🚲
+
+                </div>
+
+
+                <h3>
+
+                    Bicycle
+
+                </h3>
+
+
+                <p>
+
+                    Vehicle Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Fire Hydrant</h3>
-
-            <p>
-                Street Object
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
 
 
-        <!-- 12 STOP SIGN -->
+            <!-- =============================================
+                 19 MOTORCYCLE
+            ============================================== -->
 
-        <div class="ai-object-card stop-sign">
+            <div class="ai-object-card motorcycle">
 
-            <div class="object-number">
-                12
+
+                <div class="object-number">
+
+                    19
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🏍️
+
+                </div>
+
+
+                <h3>
+
+                    Motorcycle
+
+                </h3>
+
+
+                <p>
+
+                    Vehicle Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <div class="ai-object-illustration">
-                🛑
+
+
+            <!-- =============================================
+                 20 CHAIR
+            ============================================== -->
+
+            <div class="ai-object-card chair">
+
+
+                <div class="object-number">
+
+                    20
+
+                </div>
+
+
+                <div class="ai-object-illustration">
+
+                    🪑
+
+                </div>
+
+
+                <h3>
+
+                    Chair
+
+                </h3>
+
+
+                <p>
+
+                    Furniture Detection
+
+                </p>
+
+
+                <span>
+
+                    AI Vision
+
+                </span>
+
+
             </div>
 
-            <h3>Stop Sign</h3>
-
-            <p>
-                Road Sign
-            </p>
-
-            <span>
-                AI Vision
-            </span>
 
         </div>
 
 
-        <!-- 13 PARKING METER -->
+    </section>
 
-        <div class="ai-object-card parking-meter">
 
-            <div class="object-number">
-                13
-            </div>
 
-            <div class="ai-object-illustration">
-                🅿️
-            </div>
-
-            <h3>Parking Meter</h3>
-
-            <p>
-                Street Object
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
-
-
-        <!-- 14 BENCH -->
-
-        <div class="ai-object-card bench">
-
-            <div class="object-number">
-                14
-            </div>
-
-            <div class="ai-object-illustration">
-                🪑
-            </div>
-
-            <h3>Bench</h3>
-
-            <p>
-                Public Object
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
-
-
-        <!-- 15 BIRD -->
-
-        <div class="ai-object-card bird">
-
-            <div class="object-number">
-                15
-            </div>
-
-            <div class="ai-object-illustration">
-                🐦
-            </div>
-
-            <h3>Bird</h3>
-
-            <p>
-                Animal Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
-
-
-        <!-- 16 CAT -->
-
-        <div class="ai-object-card cat">
-
-            <div class="object-number">
-                16
-            </div>
-
-            <div class="ai-object-illustration">
-                🐈
-            </div>
-
-            <h3>Cat</h3>
-
-            <p>
-                Animal Detection
-            </p>
-
-            <span>
-                AI Vision
-            </span>
-
-        </div>
-
-
-        <!-- 17 DOG -->
-
-        <div class="ai-object-card dog">
-
-            <div class="object-number">
-                17
-<!-- =====================================================
-     AI DETECTABLE OBJECTS SECTION
-     UI ONLY – DOES NOT CHANGE OBJECT DETECTION
-===================================================== -->
-
-<section class="ai-objects-section">
-
-    <div class="ai-objects-header">
-
-        <div class="ai-header-icon">
-            🤖
-        </div>
-
-        <div>
-
-            <span class="ai-small-title">
-                ARTIFICIAL INTELLIGENCE
-            </span>
-
-            <h2>Objects Our AI Can Detect</h2>
-
-            <p>
-                Our intelligent computer vision system can identify
-                20 selected everyday objects in real time.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="ai-object-grid">
-
-
-        <!-- 01 PERSON -->
-        <div class="ai-object-card person">
-            <div class="object-number">01</div>
-            <div class="ai-object-illustration">👤</div>
-            <h3>Person</h3>
-            <p>Human Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 02 BIRD -->
-        <div class="ai-object-card bird">
-            <div class="object-number">02</div>
-            <div class="ai-object-illustration">🐦</div>
-            <h3>Bird</h3>
-            <p>Animal Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 03 LAPTOP -->
-        <div class="ai-object-card laptop">
-            <div class="object-number">03</div>
-            <div class="ai-object-illustration">💻</div>
-            <h3>Laptop</h3>
-            <p>Electronic Device</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 04 CELL PHONE -->
-        <div class="ai-object-card cell-phone">
-            <div class="object-number">04</div>
-            <div class="ai-object-illustration">📱</div>
-            <h3>Cell Phone</h3>
-            <p>Smart Device</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 05 BOOK -->
-        <div class="ai-object-card book">
-            <div class="object-number">05</div>
-            <div class="ai-object-illustration">📚</div>
-            <h3>Book</h3>
-            <p>Learning Object</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 06 BENCH -->
-        <div class="ai-object-card bench">
-            <div class="object-number">06</div>
-            <div class="ai-object-illustration">🪑</div>
-            <h3>Bench</h3>
-            <p>Furniture Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 07 MOUSE -->
-        <div class="ai-object-card mouse">
-            <div class="object-number">07</div>
-            <div class="ai-object-illustration">🖱️</div>
-            <h3>Mouse</h3>
-            <p>Computer Device</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 08 BOTTLE -->
-        <div class="ai-object-card bottle">
-            <div class="object-number">08</div>
-            <div class="ai-object-illustration">🍾</div>
-            <h3>Bottle</h3>
-            <p>Everyday Object</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 09 BACKPACK -->
-        <div class="ai-object-card backpack">
-            <div class="object-number">09</div>
-            <div class="ai-object-illustration">🎒</div>
-            <h3>Backpack</h3>
-            <p>Personal Object</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 10 APPLE -->
-        <div class="ai-object-card apple">
-            <div class="object-number">10</div>
-            <div class="ai-object-illustration">🍎</div>
-            <h3>Apple</h3>
-            <p>Food Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 11 BANANA -->
-        <div class="ai-object-card banana">
-            <div class="object-number">11</div>
-            <div class="ai-object-illustration">🍌</div>
-            <h3>Banana</h3>
-            <p>Food Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 12 ORANGE -->
-        <div class="ai-object-card orange">
-            <div class="object-number">12</div>
-            <div class="ai-object-illustration">🍊</div>
-            <h3>Orange</h3>
-            <p>Food Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 13 DOG -->
-        <div class="ai-object-card dog">
-            <div class="object-number">13</div>
-            <div class="ai-object-illustration">🐕</div>
-            <h3>Dog</h3>
-            <p>Animal Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 14 CAT -->
-        <div class="ai-object-card cat">
-            <div class="object-number">14</div>
-            <div class="ai-object-illustration">🐈</div>
-            <h3>Cat</h3>
-            <p>Animal Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 15 HORSE -->
-        <div class="ai-object-card horse">
-            <div class="object-number">15</div>
-            <div class="ai-object-illustration">🐎</div>
-            <h3>Horse</h3>
-            <p>Animal Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 16 BUS -->
-        <div class="ai-object-card bus">
-            <div class="object-number">16</div>
-            <div class="ai-object-illustration">🚌</div>
-            <h3>Bus</h3>
-            <p>Vehicle Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 17 CAR -->
-        <div class="ai-object-card car">
-            <div class="object-number">17</div>
-            <div class="ai-object-illustration">🚗</div>
-            <h3>Car</h3>
-            <p>Vehicle Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 18 BICYCLE -->
-        <div class="ai-object-card bicycle">
-            <div class="object-number">18</div>
-            <div class="ai-object-illustration">🚲</div>
-            <h3>Bicycle</h3>
-            <p>Vehicle Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 19 MOTORCYCLE -->
-        <div class="ai-object-card motorcycle">
-            <div class="object-number">19</div>
-            <div class="ai-object-illustration">🏍️</div>
-            <h3>Motorcycle</h3>
-            <p>Vehicle Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-        <!-- 20 CHAIR -->
-        <div class="ai-object-card chair">
-            <div class="object-number">20</div>
-            <div class="ai-object-illustration">🪑</div>
-            <h3>Chair</h3>
-            <p>Furniture Detection</p>
-            <span>AI Vision</span>
-        </div>
-
-
-    </div>
-
-</section>
-    <!-- =========================
+    <!-- =====================================================
          HOW IT WORKS
-    ========================== -->
+    ===================================================== -->
 
     <section class="card">
 
-        <h2>⚙️ How It Works</h2>
+
+        <h2>
+            ⚙️ How It Works
+        </h2>
+
 
         <ol>
 
-            <li>Allow camera permission.</li>
 
-            <li>Start the camera.</li>
+            <li>
+                Allow camera permission.
+            </li>
 
-            <li>Point the camera at an object.</li>
 
-            <li>Click <b>Capture Photo</b>.</li>
+            <li>
+                Start the camera.
+            </li>
 
-            <li>The captured image is sent to the AI.</li>
 
-            <li>YOLO11n analyzes the image.</li>
+            <li>
+                Point the camera at an object.
+            </li>
 
-            <li>Bounding boxes are displayed.</li>
 
-            <li>Object name and confidence are displayed.</li>
+            <li>
+                Click
+                <b>Capture Photo</b>.
+            </li>
 
-            <li>Voice announces the detected object.</li>
+
+            <li>
+                The captured image is sent to the AI.
+            </li>
+
+
+            <li>
+                YOLO11n analyzes the image.
+            </li>
+
+
+            <li>
+                Bounding boxes are displayed.
+            </li>
+
+
+            <li>
+                Object name and confidence are displayed.
+            </li>
+
+
+            <li>
+                Voice announces the detected object.
+            </li>
+
 
         </ol>
 
+
+
         <p>
+
             <b>Model:</b>
+
             YOLO11n trained on the COCO dataset
+
         </p>
 
+
+
         <p>
+
             <b>Detection Mode:</b>
+
             Camera Capture + Image Upload
+
         </p>
 
+
+
         <p>
+
             <b>Supported Objects:</b>
+
             20 selected COCO classes
+
         </p>
+
 
     </section>
+
 
 </main>
 
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script src="/static/app.js"></script>
 
+
 </body>
+
 </html>
