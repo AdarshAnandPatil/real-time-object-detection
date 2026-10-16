@@ -77,7 +77,7 @@ SUPPORTED_OBJECTS = {
     "car",
     "bicycle",
     "motorcycle",
-    "chair"
+    "pen"
 }
 
 
