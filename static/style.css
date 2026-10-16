@@ -1,0 +1,2658 @@
+/* =========================================================
+   REAL-TIME OBJECT DETECTION
+   COMPLETE MODERN AI UI DESIGN
+   UI ONLY - FUNCTIONALITY NOT CHANGED
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: #2d2440;
+
+    background:
+
+        radial-gradient(
+            circle at top left,
+            rgba(255, 214, 102, 0.30),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at top right,
+            rgba(255, 143, 171, 0.25),
+            transparent 32%
+        ),
+
+        radial-gradient(
+            circle at bottom left,
+            rgba(120, 224, 196, 0.22),
+            transparent 35%
+        ),
+
+        #f8f6fc;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        48px
+        20px
+        44px;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #6c3fa4 0%,
+
+            #9c4d9e 35%,
+
+            #d65d8c 65%,
+
+            #e58c5c 100%
+        );
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(80, 40, 100, 0.25);
+
+}
+
+
+/* Decorative Circle */
+
+header::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    top: -100px;
+
+    left: -60px;
+
+}
+
+
+/* AI Robot Decoration */
+
+header::after {
+
+    content: "🤖";
+
+    position: absolute;
+
+    right: 8%;
+
+    bottom: -25px;
+
+    font-size: 130px;
+
+    opacity: 0.15;
+
+    transform:
+        rotate(-10deg);
+
+}
+
+
+/* =========================================================
+   HEADER TITLE
+========================================================= */
+
+header h1 {
+
+    position: relative;
+
+    z-index: 1;
+
+    margin:
+        0
+        0
+        12px;
+
+    font-size:
+
+        clamp(
+            30px,
+            5vw,
+            48px
+        );
+
+    font-weight: 800;
+
+    letter-spacing: 0.3px;
+
+    text-shadow:
+
+        0 3px 12px
+        rgba(0, 0, 0, 0.18);
+
+}
+
+
+/* AI Eye Icon */
+
+header h1::before {
+
+    content: "👁️";
+
+    margin-right: 12px;
+
+}
+
+
+/* Header Subtitle */
+
+header p {
+
+    position: relative;
+
+    z-index: 1;
+
+    margin: 0;
+
+    font-size:
+
+        clamp(
+            15px,
+            2vw,
+            19px
+        );
+
+    opacity: 0.95;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+main {
+
+    width:
+
+        min(
+            1100px,
+            calc(100% - 30px)
+        );
+
+    margin:
+
+        32px
+        auto
+        60px;
+
+}
+
+
+/* =========================================================
+   GENERAL CARDS
+========================================================= */
+
+.card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    border:
+
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.9
+        );
+
+    border-radius: 24px;
+
+    padding: 28px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+
+        0 10px 30px
+        rgba(73, 51, 92, 0.10),
+
+        0 2px 8px
+        rgba(73, 51, 92, 0.05);
+
+    transition:
+
+        transform 0.3s ease,
+
+        box-shadow 0.3s ease;
+
+}
+
+
+/* Card Hover */
+
+.card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+
+        0 18px 40px
+        rgba(73, 51, 92, 0.15);
+
+}
+
+
+/* =========================================================
+   CARD TITLES
+========================================================= */
+
+.card h2 {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin:
+
+        0
+        0
+        20px;
+
+    font-size:
+
+        clamp(
+            22px,
+            3vw,
+            29px
+        );
+
+    color:
+        #56356d;
+
+    font-weight:
+        750;
+
+}
+
+
+/* Gradient Underline */
+
+.card h2::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 3px;
+
+    border-radius: 10px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+
+            #f7b267,
+
+            #e76f8f,
+
+            #9b5de5,
+
+            transparent
+        );
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+========================================================= */
+
+.card p {
+
+    line-height: 1.7;
+
+    color:
+        #5e5669;
+
+    font-size:
+        16px;
+
+}
+
+
+/* =========================================================
+   CAMERA SECTION
+========================================================= */
+
+.camera {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 330px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #2a1f3d,
+
+            #3d2854,
+
+            #56356d
+        );
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border:
+
+        5px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    box-shadow:
+
+        inset
+        0
+        0
+        50px
+        rgba(0, 0, 0, 0.35),
+
+        0 12px 25px
+        rgba(70, 40, 90, 0.20);
+
+}
+
+
+/* AI Scan Line */
+
+.camera::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 150%;
+
+    height: 2px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #ffd166,
+
+            #ffffff,
+
+            #ff8fab,
+
+            transparent
+
+        );
+
+    top: 15%;
+
+    left: -25%;
+
+    opacity: 0.55;
+
+    animation:
+
+        scanLine
+        3s
+        linear
+        infinite;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+}
+
+
+@keyframes scanLine {
+
+    0% {
+
+        top: 10%;
+
+        opacity: 0;
+
+    }
+
+
+    20% {
+
+        opacity: 0.7;
+
+    }
+
+
+    80% {
+
+        opacity: 0.7;
+
+    }
+
+
+    100% {
+
+        top: 90%;
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   CAMERA VIDEO
+========================================================= */
+
+video {
+
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+
+    max-height: 550px;
+
+    display: block;
+
+    object-fit: contain;
+
+    background:
+        #151019;
+
+}
+
+
+/* =========================================================
+   CAMERA MESSAGE
+========================================================= */
+
+.camera span {
+
+    position: absolute;
+
+    z-index: 3;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: white;
+
+    font-size:
+        20px;
+
+    font-weight:
+        600;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(100, 70, 120, 0.20),
+
+            rgba(15, 10, 20, 0.70)
+
+        );
+
+}
+
+
+/* =========================================================
+   BUTTON CONTAINER
+========================================================= */
+
+.buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 22px;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+button,
+label {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 48px;
+
+    padding:
+
+        12px
+        22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 650;
+
+    font-family: inherit;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #8e5cc5,
+
+            #c45fa2
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(142, 92, 197, 0.25);
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease,
+
+        filter 0.25s ease;
+
+}
+
+
+/* Button Shine */
+
+button::before,
+label::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 50px;
+
+    height: 150%;
+
+    top: -25%;
+
+    left: -80px;
+
+    transform:
+        rotate(25deg);
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+    transition:
+        left 0.5s ease;
+
+}
+
+
+button:hover::before,
+label:hover::before {
+
+    left:
+        120%;
+
+}
+
+
+button:hover,
+label:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+
+        0 12px 24px
+        rgba(142, 92, 197, 0.32);
+
+    filter:
+        brightness(1.05);
+
+}
+
+
+button:active,
+label:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   DISABLED BUTTON
+========================================================= */
+
+button:disabled {
+
+    opacity:
+        0.45;
+
+    cursor:
+        not-allowed;
+
+    transform:
+        none;
+
+    box-shadow:
+        none;
+
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+label input {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   CAPTURE BUTTON
+========================================================= */
+
+#capture {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #f4a261,
+
+            #e76f51
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(231, 111, 81, 0.25);
+
+}
+
+
+/* =========================================================
+   STOP BUTTON
+========================================================= */
+
+#stop {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #d95d75,
+
+            #a63d5a
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(180, 60, 90, 0.22);
+
+}
+
+
+/* =========================================================
+   UPLOAD BUTTON
+========================================================= */
+
+label {
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            #4f9b8f,
+
+            #6dbb8b
+        );
+
+    box-shadow:
+
+        0 7px 16px
+        rgba(70, 150, 130, 0.25);
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+#status {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin:
+
+        20px
+        0
+        0;
+
+    padding:
+        14px;
+
+    text-align: center;
+
+    border-radius:
+        14px;
+
+    font-weight:
+        650;
+
+    color:
+        #6c4c72;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff4d6,
+
+            #ffe4d6
+
+        );
+
+    border:
+
+        1px solid
+        rgba(230, 160, 100, 0.25);
+
+}
+
+
+#status::before {
+
+    content:
+        "🤖";
+
+}
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
+
+#canvas {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   RESULT IMAGE
+========================================================= */
+
+#result {
+
+    display: none;
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin:
+
+        20px
+        auto;
+
+    border-radius:
+        18px;
+
+    border:
+
+        4px solid
+        #ffffff;
+
+    box-shadow:
+
+        0 12px 30px
+        rgba(80, 50, 90, 0.20);
+
+}
+
+
+/* =========================================================
+   DETECTION COUNT
+========================================================= */
+
+#count {
+
+    padding:
+        15px;
+
+    border-radius:
+        14px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #f3e8ff,
+
+            #ffe6f0
+
+        );
+
+    color:
+        #6d3e70;
+
+    font-weight:
+        650;
+
+    text-align:
+        center;
+
+}
+
+
+/* =========================================================
+   DETECTED ITEMS
+========================================================= */
+
+#items {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(180px, 1fr)
+        );
+
+    gap:
+        14px;
+
+    margin-top:
+        18px;
+
+}
+
+
+/* =========================================================
+   GENERAL ITEM CARD
+========================================================= */
+
+.item {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        16px;
+
+    border-radius:
+        16px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff8e7,
+
+            #fff0f5
+
+        );
+
+    border:
+
+        1px solid
+        rgba(220, 150, 180, 0.18);
+
+    color:
+        #54435b;
+
+    box-shadow:
+
+        0 5px 14px
+        rgba(100, 70, 100, 0.07);
+
+    transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease;
+
+}
+
+
+.item:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+
+        0 12px 20px
+        rgba(100, 70, 100, 0.12);
+
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.card ol {
+
+    list-style:
+        none;
+
+    padding:
+        0;
+
+    margin:
+        20px 0;
+
+    counter-reset:
+        steps;
+
+}
+
+
+.card ol li {
+
+    position:
+        relative;
+
+    counter-increment:
+        steps;
+
+    margin-bottom:
+        13px;
+
+    padding:
+
+        16px
+        18px
+        16px
+        62px;
+
+    border-radius:
+        16px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #f7f0ff,
+
+            #fff5f8
+
+        );
+
+    color:
+        #55485c;
+
+    box-shadow:
+
+        0 4px 10px
+        rgba(100, 70, 100, 0.06);
+
+    transition:
+
+        transform
+        0.25s ease;
+
+}
+
+
+.card ol li:hover {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+.card ol li::before {
+
+    content:
+        counter(steps);
+
+    position:
+        absolute;
+
+    left:
+        15px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    color:
+        white;
+
+    font-weight:
+        700;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #9b5de5,
+
+            #e76f8f
+
+        );
+
+}
+
+
+/* =========================================================
+   BOLD TEXT
+========================================================= */
+
+b,
+strong {
+
+    color:
+        #633d72;
+
+}
+
+
+.card p b {
+
+    display:
+        inline-block;
+
+    margin-right:
+        5px;
+
+    color:
+        #8c4d83;
+
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+
+    width:
+        10px;
+
+}
+
+
+::-webkit-scrollbar-track {
+
+    background:
+        #f4eef8;
+
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    border-radius:
+        20px;
+
+    background:
+
+        linear-gradient(
+
+            #9b5de5,
+
+            #d65d8c
+
+        );
+
+}
+
+
+/* =========================================================
+   PAGE CARD ANIMATION
+========================================================= */
+
+.card {
+
+    animation:
+
+        cardAppear
+        0.5s ease
+        both;
+
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   AI DETECTABLE OBJECTS SECTION
+===================================================== */
+
+.ai-objects-section {
+
+    margin: 35px 0;
+
+    padding: 35px;
+
+    border-radius: 24px;
+
+    background:
+
+        radial-gradient(
+            circle at top left,
+            rgba(255, 183, 77, 0.18),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at bottom right,
+            rgba(186, 104, 200, 0.16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at center right,
+            rgba(77, 182, 172, 0.14),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fff8f0,
+            #f8f4ff,
+            #f2fff9
+        );
+
+    border:
+
+        1px solid
+        rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+
+        0 15px 40px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =====================================================
+   AI SECTION HEADER
+===================================================== */
+
+.ai-objects-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.ai-header-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    min-width: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 38px;
+
+    border-radius: 22px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ffb74d,
+            #ff8a65,
+            #ba68c8
+        );
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(186, 104, 200, 0.25);
+
+    animation:
+
+        aiFloat
+        3s
+        ease-in-out
+        infinite;
+
+}
+
+
+.ai-small-title {
+
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    color: #8e44ad;
+
+}
+
+
+.ai-objects-header h2 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #2d1b36;
+
+}
+
+
+.ai-objects-header p {
+
+    margin: 8px 0 0;
+
+    max-width: 650px;
+
+    line-height: 1.6;
+
+    color: #666;
+
+}
+
+
+/* =====================================================
+   AI OBJECT GRID
+===================================================== */
+
+.ai-object-grid {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fit,
+            minmax(210px, 1fr)
+        );
+
+    gap: 20px;
+
+}
+
+
+/* =====================================================
+   AI OBJECT CARD
+===================================================== */
+
+.ai-object-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 230px;
+
+    padding: 25px 20px;
+
+    border-radius: 22px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
+    border:
+
+        1px solid
+        rgba(0, 0, 0, 0.06);
+
+    box-shadow:
+
+        0 10px 25px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+
+        transform 0.35s ease,
+
+        box-shadow 0.35s ease;
+
+    text-align: center;
+
+}
+
+
+/* Decorative AI Circle */
+
+.ai-object-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    top: -55px;
+
+    right: -45px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+
+            rgba(255, 183, 77, 0.25),
+
+            rgba(186, 104, 200, 0.15)
+        );
+
+    transition:
+
+        transform
+        0.4s ease;
+
+}
+
+
+/* AI Background Text */
+
+.ai-object-card::after {
+
+    content: "AI";
+
+    position: absolute;
+
+    bottom: 12px;
+
+    right: 15px;
+
+    font-size: 40px;
+
+    font-weight: 900;
+
+    color:
+
+        rgba(
+            0,
+            0,
+            0,
+            0.035
+        );
+
+    letter-spacing: 3px;
+
+}
+
+
+/* =====================================================
+   AI CARD HOVER
+===================================================== */
+
+.ai-object-card:hover {
+
+    transform:
+
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+
+        0 20px 35px
+        rgba(0, 0, 0, 0.14);
+
+}
+
+
+.ai-object-card:hover::before {
+
+    transform:
+        scale(1.5);
+
+}
+
+
+/* =====================================================
+   OBJECT NUMBER
+===================================================== */
+
+.object-number {
+
+    position: absolute;
+
+    z-index: 5;
+
+    top: 15px;
+
+    left: 15px;
+
+    width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #ff8a65,
+            #ba68c8
+        );
+
+    box-shadow:
+
+        0 6px 15px
+        rgba(0, 0, 0, 0.12);
+
+}
+
+
+/* =====================================================
+   AI OBJECT ILLUSTRATION
+===================================================== */
+
+.ai-object-illustration {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 105px;
+
+    height: 105px;
+
+    margin:
+
+        10px
+        auto
+        15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 55px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #fff3e0,
+            #f3e5f5,
+            #e8f5e9
+        );
+
+    box-shadow:
+
+        inset
+        0
+        0
+        15px
+        rgba(255, 255, 255, 0.8),
+
+        0
+        8px
+        20px
+        rgba(0, 0, 0, 0.08);
+
+    transition:
+
+        transform
+        0.4s ease;
+
+}
+
+
+.ai-object-card:hover
+.ai-object-illustration {
+
+    transform:
+
+        rotate(-5deg)
+        scale(1.12);
+
+}
+
+
+/* =====================================================
+   OBJECT NAME
+===================================================== */
+
+.ai-object-card h3 {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+
+        8px
+        0
+        6px;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #2d2d2d;
+
+}
+
+
+/* =====================================================
+   OBJECT DESCRIPTION
+===================================================== */
+
+.ai-object-card p {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+
+        0
+        0
+        12px;
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+
+/* =====================================================
+   AI VISION BADGE
+===================================================== */
+
+.ai-object-card span {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: inline-block;
+
+    padding:
+
+        6px
+        13px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    color: #7b1fa2;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #f3e5f5,
+            #fff3e0
+        );
+
+    border:
+
+        1px solid
+        rgba(123, 31, 162, 0.12);
+
+}
+
+
+/* =====================================================
+   EXACTLY 20 OBJECT COLOR THEMES
+===================================================== */
+
+
+/* 01 - PERSON */
+
+.ai-object-card.person {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 02 - BIRD */
+
+.ai-object-card.bird {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e3f2fd,
+            #ffffff
+        );
+
+}
+
+
+/* 03 - LAPTOP */
+
+.ai-object-card.laptop {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ede7f6,
+            #ffffff
+        );
+
+}
+
+
+/* 04 - CELL PHONE */
+
+.ai-object-card.cell-phone {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e0f7fa,
+            #ffffff
+        );
+
+}
+
+
+/* 05 - BOOK */
+
+.ai-object-card.book {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 06 - BENCH */
+
+.ai-object-card.bench {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f1f8e9,
+            #ffffff
+        );
+
+}
+
+
+/* 07 - MOUSE */
+
+.ai-object-card.mouse {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f3e5f5,
+            #ffffff
+        );
+
+}
+
+
+/* 08 - BOTTLE */
+
+.ai-object-card.bottle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e0f2f1,
+            #ffffff
+        );
+
+}
+
+
+/* 09 - BACKPACK */
+
+.ai-object-card.backpack {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 10 - APPLE */
+
+.ai-object-card.apple {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ffebee,
+            #ffffff
+        );
+
+}
+
+
+/* 11 - BANANA */
+
+.ai-object-card.banana {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fffde7,
+            #ffffff
+        );
+
+}
+
+
+/* 12 - ORANGE */
+
+.ai-object-card.orange {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 13 - DOG */
+
+.ai-object-card.dog {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 14 - CAT */
+
+.ai-object-card.cat {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #f3e5f5,
+            #ffffff
+        );
+
+}
+
+
+/* 15 - HORSE */
+
+.ai-object-card.horse {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #efebe9,
+            #ffffff
+        );
+
+}
+
+
+/* 16 - BUS */
+
+.ai-object-card.bus {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff3e0,
+            #ffffff
+        );
+
+}
+
+
+/* 17 - CAR */
+
+.ai-object-card.car {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fce4ec,
+            #ffffff
+        );
+
+}
+
+
+/* 18 - BICYCLE */
+
+.ai-object-card.bicycle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #e8f5e9,
+            #ffffff
+        );
+
+}
+
+
+/* 19 - MOTORCYCLE */
+
+.ai-object-card.motorcycle {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #fff8e1,
+            #ffffff
+        );
+
+}
+
+
+/* 20 - CHAIR */
+
+.ai-object-card.pen {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #ede7f6,
+            #ffffff
+        );
+
+}
+
+
+/* =====================================================
+   FLOATING AI ICON ANIMATION
+===================================================== */
+
+@keyframes aiFloat {
+
+    0% {
+
+        transform:
+            translateY(0px);
+
+    }
+
+
+    50% {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+
+    100% {
+
+        transform:
+            translateY(0px);
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .ai-objects-section {
+
+        padding:
+
+            25px
+            18px;
+
+    }
+
+
+    .ai-objects-header {
+
+        align-items:
+            flex-start;
+
+    }
+
+
+    .ai-objects-header h2 {
+
+        font-size:
+            24px;
+
+    }
+
+
+    .ai-header-icon {
+
+        width:
+            60px;
+
+        height:
+            60px;
+
+        min-width:
+            60px;
+
+        font-size:
+            30px;
+
+    }
+
+
+    .ai-object-grid {
+
+        grid-template-columns:
+
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:
+            15px;
+
+    }
+
+
+    .ai-object-card {
+
+        min-height:
+            215px;
+
+        padding:
+
+            20px
+            12px;
+
+    }
+
+
+    .ai-object-illustration {
+
+        width:
+            85px;
+
+        height:
+            85px;
+
+        font-size:
+            45px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+    header {
+
+        padding:
+
+            38px
+            15px
+            35px;
+
+    }
+
+
+    header::after {
+
+        font-size:
+            80px;
+
+        right:
+            2%;
+
+    }
+
+
+    main {
+
+        width:
+            calc(100% - 20px);
+
+        margin:
+
+            18px
+            auto
+            40px;
+
+    }
+
+
+    .card {
+
+        padding:
+            18px;
+
+        border-radius:
+            20px;
+
+        margin-bottom:
+            18px;
+
+    }
+
+
+    .card h2 {
+
+        font-size:
+            22px;
+
+    }
+
+
+    .camera {
+
+        min-height:
+            240px;
+
+        border-radius:
+            16px;
+
+    }
+
+
+    .buttons {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    button,
+    label {
+
+        width:
+            100%;
+
+        min-height:
+            50px;
+
+    }
+
+
+    #items {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .card ol li {
+
+        padding-left:
+            58px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+
+    .ai-objects-section {
+
+        margin:
+
+            25px
+            0;
+
+        padding:
+
+            20px
+            12px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .ai-objects-header {
+
+        gap:
+            12px;
+
+        margin-bottom:
+            22px;
+
+    }
+
+
+    .ai-header-icon {
+
+        width:
+            52px;
+
+        height:
+            52px;
+
+        min-width:
+            52px;
+
+        border-radius:
+            16px;
+
+        font-size:
+            25px;
+
+    }
+
+
+    .ai-small-title {
+
+        font-size:
+            9px;
+
+        letter-spacing:
+            1.2px;
+
+    }
+
+
+    .ai-objects-header h2 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .ai-objects-header p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .ai-object-grid {
+
+        grid-template-columns:
+
+            repeat(
+                2,
+                1fr
+            );
+
+        gap:
+            12px;
+
+    }
+
+
+    .ai-object-card {
+
+        min-height:
+            200px;
+
+        padding:
+
+            18px
+            8px;
+
+        border-radius:
+            18px;
+
+    }
+
+
+    .object-number {
+
+        width:
+            32px;
+
+        height:
+            32px;
+
+        top:
+            10px;
+
+        left:
+            10px;
+
+        font-size:
+            10px;
+
+        border-radius:
+            10px;
+
+    }
+
+
+    .ai-object-illustration {
+
+        width:
+            70px;
+
+        height:
+            70px;
+
+        margin-top:
+            15px;
+
+        font-size:
+            37px;
+
+    }
+
+
+    .ai-object-card h3 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .ai-object-card p {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .ai-object-card span {
+
+        padding:
+
+            5px
+            9px;
+
+        font-size:
+            9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+
+    header h1 {
+
+        font-size:
+            27px;
+
+    }
+
+
+    header p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .card {
+
+        padding:
+            15px;
+
+    }
+
+
+    .card h2 {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .camera {
+
+        min-height:
+            210px;
+
+    }
+
+
+    .camera span {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .ai-object-grid {
+
+        gap:
+            9px;
+
+    }
+
+
+    .ai-object-card {
+
+        min-height:
+            190px;
+
+    }
+
+}
